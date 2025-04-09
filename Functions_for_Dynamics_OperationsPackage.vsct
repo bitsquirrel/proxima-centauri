@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!--  This is the file that defines the actual layout and type of the commands.
+        It is divided in different sections (e.g. command definition, command
+        placement, ...), with each defining a specific set of properties.
+        See the comment before each section for more details about how to
+        use it. -->
+
+  <!--  The VSCT compiler (the tool that translates this file into the binary
+        format that VisualStudio will consume) has the ability to run a preprocessor
+        on the vsct file; this preprocessor is (usually) the C++ preprocessor, so
+        it is possible to define includes and macros with the same syntax used
+        in C++ files. Using this ability of the compiler here, we include some files
+        defining some of the constants that we will use inside the file. -->
+
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h" />
+
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h" />
+
+  <!--The Commands section is where commands, menus, and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+  <Commands package="guidFunctions_for_Dynamics_OperationsPackage">
+
+    <Menus>
+      <Menu guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="TopLevelMenu" priority="0x700" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
+        <Strings>
+          <ButtonText>Functions 365</ButtonText>
+          <CommandName>Functions 365</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+    
+    <!-- Inside this section we have different sub-sections: one for the menus, another
+    for the menu groups, one for the buttons (the actual commands), one for the combos
+    and the last one for the bitmaps used. Each element is identified by a command id that
+    is a unique pair of guid and numeric identifier; the guid part of the identifier is usually
+    called "command set" and is used to group different command inside a logically related
+    group; your package should define its own command set in order to avoid collisions
+    with command ids defined by other packages. -->
+
+    <Groups>
+      <Group guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="TopLevelMenu" />
+      </Group>
+      <Group guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE" />
+      </Group>
+      <Group guid="extensionCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="TopLevelMenu" />
+      </Group>
+      <Group guid="projectNodeCmdSet" id="ProjectNodeGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE" />
+      </Group>
+      <Group guid="bestPracticeCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE" />
+      </Group>
+      <Group guid="incodeLabelCmdSet" id="incodeLabelGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
+      </Group>
+      <Group guid="incodeCmdSet" id="incodeGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
+      </Group>
+      <Group guid="incodeTableCmdSet" id="incodeTableGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
+      </Group>
+      <Group guid="incodeCodeCmdSet" id="incodeCodeGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
+      </Group>
+      <Group guid="tableToContractCmdSet" id="TableContractGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE" />
+      </Group>
+      <Group guid="applicationTreeCmdSet" id="MyCommandGroup" priority="0x0600">
+        <Parent guid="applicationTreeCmdSet" id="applicationExplorerGroup" />
+      </Group>
+      <Group guid="propertiesLabelCmdSet" id="propertiesLabelGroup" priority="0x0600">
+        <Parent guid="propertiesLabelCmdSet" id="propertiesGroup" />
+      </Group>
+    </Groups>
+      <!--Buttons section. -->
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+    <Buttons>
+      <!--To define a menu group you have to specify its ID, the parent menu and its display priority.
+          The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
+          the CommandFlag node.
+          You can add more than one CommandFlag node e.g.:
+              <CommandFlag>DefaultInvisible</CommandFlag>
+              <CommandFlag>DynamicVisibility</CommandFlag>
+          If you do not want an image next to your command, remove the Icon node /> -->
+
+        <Button guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="LabelEditorCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages5" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Label Editor</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="cmdidLabelSearchCommand" priority="0x0101" type="Button">
+        <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages5" id="bmpPicSearch" />
+        <Strings>
+          <ButtonText>Label Search</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="cmdidCodeSearchCommand" priority="0x0102" type="Button">
+        <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages3" id="bmpPicSearch" />
+        <Strings>
+          <ButtonText>Code Search</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="cmdidBPEditorCommand" priority="0x0103" type="Button">
+        <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages2" id="bmpPicArrows" />
+        <Strings>
+          <ButtonText>Best Practice Editor</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="cmdidRunBestPractice" priority="0x0104" type="Button">
+        <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages4" id="bmpPicX" />
+        <Strings>
+          <ButtonText>Run best practice check on project</ButtonText>
+        </Strings>
+      </Button>
+
+      
+      <Button guid="tableToContractCmdSet" id="cmdidCreateFormCommand" priority="0x0100" type="Button">
+        <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+        <Icon guid="guidImages4" id="bmpPic2" />
+        <Strings>
+          <ButtonText>Create form / Apply pattern</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="tableToContractCmdSet" id="cmdidCreateMenuItemCommand" priority="0x0101" type="Button">
+        <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+        <Icon guid="guidImages5" id="bmpPicArrows" />
+        <Strings>
+          <ButtonText>Create menu item</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="tableToContractCmdSet" id="cmdidCreateDataEntity" priority="0x0102" type="Button">
+        <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+        <Strings>
+          <ButtonText>Create data entity</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="tableToContractCmdSet" id="cmdidCreatePrivielegesCommand" priority="0x0103" type="Button">
+        <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+        <Strings>
+          <ButtonText>Create privileges</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="tableToContractCmdSet" id="cmdidLabelsCommand" priority="0x0104" type="Button">
+        <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+        <Strings>
+          <ButtonText>Generate labels</ButtonText>
+        </Strings>
+      </Button>
+
+      <!--
+      <Button guid="tableToContractCmdSet" id="cmdidTableToCtrctCmd" priority="0x0102" type="Button">
+        <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+        <Strings>
+          <ButtonText>Table to contract</ButtonText>
+        </Strings>
+      </Button>
+      -->
+
+      
+      <Button guid="incodeLabelCmdSet" id="cmdidSearchLabelInCode" priority="0x0100" type="Button">
+        <Parent guid="incodeLabelCmdSet" id="incodeLabelGroup" />
+        <Strings>
+          <ButtonText>Find label</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeLabelCmdSet" id="cmdidCreateLabelInCodeCmd" priority="0x0101" type="Button">
+        <Parent guid="incodeLabelCmdSet" id="incodeLabelGroup" />
+        <Strings>
+          <ButtonText>Create label</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeLabelCmdSet" id="cmdidFindReferencesCommand" priority="0x0102" type="Button">
+        <Parent guid="incodeLabelCmdSet" id="incodeLabelGroup" />
+        <Strings>
+          <ButtonText>Find label references</ButtonText>
+        </Strings>
+      </Button>
+
+      
+      <Button guid="incodeCmdSet" id="cmdidCommentCmd" priority="0x0100" type="Button">
+        <Parent guid="incodeCmdSet" id="incodeGroup" />
+        <Strings>
+          <ButtonText>Apply comments</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeCmdSet" id="cmdidConstructMethodCmd" priority="0x0100" type="Button">
+        <Parent guid="incodeCmdSet" id="incodeGroup" />
+        <Strings>
+          <ButtonText>Construct method</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeCmdSet" id="cmdidCreateParmMethCmd" priority="0x0100" type="Button">
+        <Parent guid="incodeCmdSet" id="incodeGroup" />
+        <Strings>
+          <ButtonText>Create parm method(s)</ButtonText>
+        </Strings>
+      </Button>
+
+      
+      <Button guid="incodeTableCmdSet" id="cmdidExistsCmd" priority="0x0100" type="Button">
+        <Parent guid="incodeTableCmdSet" id="incodeTableGroup" />
+        <Strings>
+          <ButtonText>Create table exists</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeTableCmdSet" id="cmdidFindCmd" priority="0x0101" type="Button">
+        <Parent guid="incodeTableCmdSet" id="incodeTableGroup" />
+        <Strings>
+          <ButtonText>Create table find (Alt index)</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeTableCmdSet" id="cmdidFindPrimaryCommand" priority="0x0102" type="Button">
+        <Parent guid="incodeTableCmdSet" id="incodeTableGroup" />
+        <Strings>
+          <ButtonText>Create table find (Pri index)</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeTableCmdSet" id="cmdidFindRecIdCommand" priority="0x0103" type="Button">
+        <Parent guid="incodeTableCmdSet" id="incodeTableGroup" />
+        <Strings>
+          <ButtonText>Create table find (Recid)</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeTableCmdSet" id="cmdidLookupCmd" priority="0x0104" type="Button">
+        <Parent guid="incodeTableCmdSet" id="incodeTableGroup" />
+        <Strings>
+          <ButtonText>Create table lookup</ButtonText>
+        </Strings>
+      </Button>
+
+      
+      <Button guid="incodeCodeCmdSet" id="cmdidForCommand" priority="0x0103" type="Button">
+        <Parent guid="incodeCodeCmdSet" id="incodeCodeGroup" />
+        <Strings>
+          <ButtonText>For loop</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeCodeCmdSet" id="cmdidTryCatchCmd" priority="0x0104" type="Button">
+        <Parent guid="incodeCodeCmdSet" id="incodeCodeGroup" />
+        <Strings>
+          <ButtonText>Try catch clr</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="incodeCodeCmdSet" id="cmdidTryCatchFinalCmd" priority="0x0105" type="Button">
+        <Parent guid="incodeCodeCmdSet" id="incodeCodeGroup" />
+        <Strings>
+          <ButtonText>Try catch final</ButtonText>
+        </Strings>
+      </Button>
+      
+      
+      <Button guid="applicationTreeCmdSet" id="cmdidClassEventsCommand" priority="0x0100" type="Button">
+        <Parent guid="applicationTreeCmdSet" id="MyCommandGroup" />
+        <Strings>
+          <ButtonText>Create form event class</ButtonText>
+        </Strings>
+      </Button>
+
+      
+      <Button guid="propertiesLabelCmdSet" id="cmdidCreateLabelFromPropertyCmd" priority="0x0101" type="Button">
+        <Parent guid="propertiesLabelCmdSet" id="propertiesLabelGroup" />
+        <Strings>
+          <ButtonText>Create label</ButtonText>
+        </Strings>
+      </Button>
+      
+      
+      <Button guid="bestPracticeCmdSet" id="cmdidDefaultModel" priority="0x0100" type="Button">
+        <Parent guid="bestPracticeCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages4" id="bmpPicArrows" />
+        <Strings>
+          <ButtonText>Set model as default</ButtonText>
+        </Strings>
+      </Button>
+
+      
+      <Button guid="extensionCmdSet" id="cmdidExportModels" priority="0x0200" type="Button">
+        <Parent guid="extensionCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages5" id="bmpPic2" />
+        <Strings>
+          <ButtonText>Export models excel</ButtonText>
+        </Strings>
+      </Button>
+
+    </Buttons>
+
+    <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
+    <Bitmaps>
+      <!--  The bitmap id is defined in a way that is a little bit different from the others:
+            the declaration starts with a guid for the bitmap strip, then there is the resource id of the
+            bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
+            inside a button definition. An important aspect of this declaration is that the element id
+            must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
+      <Bitmap guid="guidImages" href="Resources\LabelEditorCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages1" href="Resources\LabelSearchCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages2" href="Resources\BPEditorCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages3" href="Resources\CodeSearchCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages4" href="Resources\RunBestPractice.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages5" href="Resources\New.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+    </Bitmaps>
+  </Commands>
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidFunctions_for_Dynamics_OperationsPackage" value="{28619b35-d8e1-4feb-a99a-9dec64c935a7}" />
+
+    <GuidSymbol name="bestPracticeCmdSet" value="{f16df604-a4eb-458f-a357-d2ec3e1f92a7}">
+      <IDSymbol value="4128" name="MyMenuGroup" />
+      <IDSymbol value="7485" name="cmdidDefaultModel" />
+    </GuidSymbol>
+
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidFunctions_for_Dynamics_OperationsPackageCmdSet" value="{0d83bcff-55f6-4b2c-9583-5b3df6a1104d}">
+      <IDSymbol name="LabelEditorCommandId" value="0x0100" />
+      <IDSymbol value="4991" name="cmdidLabelSearchCommand" />
+      <IDSymbol value="4992" name="cmdidBPEditorCommand" />
+      <IDSymbol value="4993" name="cmdidCodeSearchCommand" />
+      <IDSymbol value="2561" name="cmdidRunBestPractice" />
+      <IDSymbol name="TopLevelMenu" value="0x1021" />
+      <IDSymbol name="MyMenuGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="extensionCmdSet" value="{242cfc91-1229-4b45-82df-83d5ac34bf14}">
+      <IDSymbol value="25699" name="cmdidExportModels" />
+      <IDSymbol name="TopLevelMenu" value="0x1021" />
+      <IDSymbol name="MyMenuGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="applicationTreeCmdSet" value="{cd805c4b-712d-4b40-bcdc-f42885e12eef}">
+      <IDSymbol name="applicationExplorerGroup" value="4097" />
+      <IDSymbol name="applicationExplorerMainGroup" value="447" />
+      <IDSymbol name="MyCommandGroup" value="0x0100" />
+      <IDSymbol name="cmdidClassEventsCommand" value="311" />
+    </GuidSymbol>
+
+    <GuidSymbol name="projectNodeCmdSet" value="{bfb0546c-ad20-4f59-9e55-e6467808e2be}">
+      <IDSymbol name="cmdidClassCmd" value="257" />
+      <IDSymbol name="cmdidPrivilegesCmd" value="256" />
+      <IDSymbol name="cmdidTestCmd" value="261" />
+      <IDSymbol name="cmdidFindAllModelObjects" value="4129" />
+      <IDSymbol name="ProjectNodeGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="tableToContractCmdSet" value="{3a130553-9af1-45d5-ab49-55c2028cd892}">
+      <IDSymbol name="cmdidTableToCtrctCmd" value="4135" />
+      <IDSymbol name="cmdidLabelsCommand" value="1112" />
+      <IDSymbol name="cmdidCreateMenuItemCommand" value="3331" />
+      <IDSymbol name="cmdidCreateFormCommand" value="3332" />
+      <IDSymbol name="cmdidCreatePrivielegesCommand" value="3333" />
+      <IDSymbol name="cmdidCreateDataEntity" value="25678" />
+      <IDSymbol name="TableContractGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="incodeLabelCmdSet" value="{c02b9a5c-7778-4cbb-994c-5117746d2d8a}">
+      <IDSymbol name="cmdidSearchLabelInCode" value="85678" />
+      <IDSymbol name="cmdidCreateLabelInCodeCmd" value="100" />
+      <IDSymbol name="cmdidFindReferencesCommand" value="4521" />
+      <IDSymbol name="incodeLabelGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="propertiesLabelCmdSet" value="{A72BD644-1979-4CBC-A620-EA4112198A66}">
+      <IDSymbol name="propertiesGroup" value="1282" />
+      <IDSymbol name="cmdidCreateLabelFromPropertyCmd" value="121" />
+      <IDSymbol name="propertiesLabelGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="incodeCmdSet" value="{34c200eb-bc9e-45af-9e9f-a9cb1a4e7668}">
+      <IDSymbol name="cmdidCommentCmd" value="110" />
+      <IDSymbol name="cmdidConstructMethodCmd" value="111" />
+      <IDSymbol name="cmdidCreateParmMethCmd" value="115" />
+      <IDSymbol name="cmdidMethodCocCmd" value="260" />
+      <IDSymbol name="incodeGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="incodeTableCmdSet" value="{89d99d81-7b70-40ce-8965-5c095a127236}">
+      <IDSymbol name="cmdidExistsCmd" value="4129" />
+      <IDSymbol name="cmdidFindCmd" value="4130" />
+      <IDSymbol name="cmdidFindPrimaryCommand" value="4141" />
+      <IDSymbol name="cmdidFindRecIdCommand" value="4142" />
+      <IDSymbol name="cmdidLookupCmd" value="4515" />
+      <IDSymbol name="incodeTableGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="incodeCodeCmdSet" value="{b4197cf2-8e29-4a12-946b-3879be914007}">
+      <IDSymbol name="cmdidForCommand" value="101" />
+      <IDSymbol name="cmdidTryCatchCmd" value="102" />
+      <IDSymbol name="cmdidTryCatchFinalCmd" value="103" />
+      <IDSymbol name="incodeCodeGroup" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidImages" value="{03e3dc37-d8c5-400e-b076-2fda3c435601}">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{6cf98c26-0d7a-4444-9abc-3bacaf8f79fd}" name="guidImages1">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{a210c9fe-6780-49ef-a4a1-416990f3e7d3}" name="guidImages2">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{649671fd-dff9-4538-ac91-e437d04920f2}" name="guidFunctions_for_Dynamics_OperationsPackageCmdSet1">
+      <IDSymbol value="4128" name="MyMenuGroup" />
+      <IDSymbol value="7485" name="cmdidDefaultModel" />
+    </GuidSymbol>
+
+    <GuidSymbol value="{b22a97b7-9435-4f4a-b679-0b4e4e1ddabd}" name="guidImages3">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{350c9bd6-3df4-4d36-8d00-839afccc867e}" name="guidImages4">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+
+    <GuidSymbol value="{8bdc02d4-71f0-4d87-b6fe-9be6307a2eca}" name="guidImages5">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+
+  
+  </Symbols>
+</CommandTable>

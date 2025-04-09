@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Functions_for_Dynamics_Operations.LabelEditorControl"
+             xmlns:Forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+             Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
+             mc:Ignorable="d"
+             Name="MyToolWindow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Margin="0,0,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <DockPanel HorizontalAlignment="Left" Height="32" LastChildFill="False" Margin="10,0,0,0" VerticalAlignment="Top" Width="1191">
+            <Label x:Name="labelId" Content="Label File" Margin="10,6,0,0" VerticalAlignment="Top" Width="80" Height="24" FontWeight="Bold" FontFamily="Arial Black" Foreground="CadetBlue"/>
+            <ComboBox x:Name="LabelsComB" Margin="5,6,0,0" VerticalAlignment="Top" Width="200" Height="24" SelectionChanged="LabelsComB_SelectionChanged" FontFamily="Arial Black"/>
+            <Label x:Name="labelExclude" Content="Exclude Lang" Height="24" FontWeight="Bold" Margin="5,6,0,0" Foreground="CadetBlue" Width="105"/>
+            <ComboBox x:Name="ExcludeComB" Margin="5,6,0,0" Width="66" SelectionChanged="ExcludeComB_SelectionChanged" FontFamily="Arial Black"/>
+            <Label x:Name="label5" Content="Propagate" Height="24" FontWeight="Bold" Margin="5,6,0,0" Width="80" Foreground="CadetBlue"/>
+            <CheckBox x:Name="AutoPropagate" Content="" Height="18" Margin="5,10,0,0" Width="25" Foreground="CadetBlue"/>
+            <Label x:Name="label5_Copy" Content="Translate" Height="24" FontWeight="Bold" Margin="5,6,0,0" Width="80" Foreground="CadetBlue"/>
+            <CheckBox x:Name="AutoTranslate" Content="" Height="17" Margin="5,10,0,0" Width="25"/>
+            <Label x:Name="label4" Content="Description" Height="24" VerticalAlignment="Top" Width="80" FontWeight="Bold" Margin="5,6,0,0" Foreground="CadetBlue"/>
+            <TextBox x:Name="DefaultTxt" Height="24" TextWrapping="Wrap" Margin="5,6,0,0" Width="310" TextChanged="DefaultTxt_TextChanged"/>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Left" Height="32" LastChildFill="False" Margin="10,33,0,0" VerticalAlignment="Top" Width="1191">
+            <Label x:Name="label1" Content="Language" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontFamily="Arial Black" Background="{x:Null}" Foreground="CadetBlue"/>
+            <ComboBox x:Name="LabelfilesComB" HorizontalAlignment="Left" Margin="5,6,0,0" VerticalAlignment="Top" Width="200" Height="24" FontFamily="Arial Black" SelectionChanged="LabelfilesComB_SelectionChanged"/>
+            <Label x:Name="label1_Copy" Content="Search" Height="24" FontWeight="Bold" Margin="5,6,0,0" Width="105" Foreground="CadetBlue"/>
+            <TextBox x:Name="SearchTextBox" Height="24" TextWrapping="Wrap" TextChanged="SearchTextBox_TextChanged" Margin="5,6,0,0" Width="537"/>
+            <Button x:Name="ClearSearchCmd" Margin="5,6,0,0" Height="24" VerticalAlignment="Top" Content="Clear" Click="ClearSearchCmd_Click" FontWeight="Bold" Width="75"/>
+            <Button x:Name="SyncEmpty" Content="Sync" Click="SyncEmpty_Click" FontWeight="Bold" Width="75" Height="24" Margin="4,4,0,0"/>
+        </DockPanel>
+        <Grid Margin = "10,75,-5,16" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Content="..."/>
+            <WindowsFormsHost Margin="0,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Forms:DataGridView x:Name="PrimaryLabelGridView" Location="0,0" ColumnHeadersVisible="True" SelectionMode="FullRowSelect" MultiSelect="False" SelectionChanged="Primary_OnSelectionChanged" GridColor="DarkSlateGray"/>
+            </WindowsFormsHost>
+            <WindowsFormsHost Margin="0,10,10,0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Forms:DataGridView x:Name="SecondaryLabelGridView" Location="0,0" ColumnHeadersVisible="True" SelectionMode="FullRowSelect" MultiSelect="False" SelectionChanged="Secondary_OnSelectionChanged" GridColor="DarkSlateGray"/>
+            </WindowsFormsHost>
+        </Grid>
+    </Grid>
+</UserControl>
