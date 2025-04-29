@@ -45,6 +45,8 @@ namespace Functions_for_Dynamics_Operations
 
         public void StopBPEditor()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             foreach (ModelInfo mi in VStudioUtils.GetAXProjectsModelsInfoInSolution())
             {
                 if (mi != null && mi.Name != "")

@@ -247,6 +247,8 @@ namespace Functions_for_Dynamics_Operations
             DataGridView.DataSource = codeSearchResults.SelectMany(result => result ?? new List<DLabelSearch>()).ToList();
 
             GridUtils.SetGridLayoutSearch(DataGridView);
+
+            VStudioUtils.LogToGenOutput($"Searching finished");
         }
 
         internal void SearchForLabels(string directory, List<Threader> threads)

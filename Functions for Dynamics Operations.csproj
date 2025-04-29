@@ -63,6 +63,7 @@
     <Compile Include="Forms\CreateFormForm.Designer.cs">
       <DependentUpon>CreateFormForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functions\StartRunCodeSearchFunc.cs" />
     <Compile Include="Functions\SearchFunctionCode.cs" />
     <Compile Include="Commands\RunBestPracticeCommand.cs" />
     <Compile Include="Functions\DataEntityFunc.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Functions\MenuItemsFunc.cs" />
     <Compile Include="Functions\PrivilegeFunc.cs" />
     <Compile Include="Functions\RuntimeHost.cs" />
+    <Compile Include="Functions\StartRunLabelSearchFunc.cs" />
+    <Compile Include="Functions\ToolWindows.cs" />
     <Compile Include="Objects\CurrentMetadataConfig.cs" />
     <Compile Include="Objects\Enums.cs" />
     <Compile Include="Tools\CodeSearch.cs" />

@@ -154,21 +154,6 @@ namespace Functions_for_Dynamics_Operations
         private void UnadviseSolutionEvents()
         {
             // This is not working - the solution must remain open otherwise the events are not triggered
-            /*
-            ThreadHelper.ThrowIfNotOnUIThread();
-
-            if (solution != null)
-            {
-                if (_hSolutionEvents != uint.MaxValue)
-                {
-                    solution.UnadviseSolutionEvents(_hSolutionEvents);
-
-                    _hSolutionEvents = uint.MaxValue;
-                }
-
-                solution = null;
-            }
-            */
         }
 
         private void OnOpenToolWindow()
@@ -194,9 +179,13 @@ namespace Functions_for_Dynamics_Operations
 
         private void OnCloseToolWindow()
         {
+            new StartRunLabelSearchFunc(this).StopLabelSearch();
+
             new StartRunLabelEditorFunc(this).StopLabelEditor();
 
-            new StartRunBPEditorFunc (this).StopBPEditor();
+            new StartRunCodeSearchFunc(this).StopCodeSearch();
+
+            new StartRunBPEditorFunc(this).StopBPEditor();
         }
     }
 }

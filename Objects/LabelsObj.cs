@@ -52,12 +52,6 @@ namespace Functions_for_Dynamics_Operations
             DescriptionExisted = descriptionExisted;
         }
     }
-    /*
-    public class LabelId
-    {
-        public string Id { get; set; }
-    }
-    */
 
     public class DLabelSearch
     {

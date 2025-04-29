@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="Functions_for_Dynamics_Operations.e0e4c9ad-1319-4850-ace2-4af7dd21da8c" Version="17.1.30.43" Language="en-US" Publisher="Super Awesome Software" />
+        <Identity Id="Functions_for_Dynamics_Operations.e0e4c9ad-1319-4850-ace2-4af7dd21da8c" Version="17.1.31.43" Language="en-US" Publisher="Super Awesome Software" />
         <DisplayName>9A Developer Tools ( Dynamics 365 F&amp;O )</DisplayName>
         <Description xml:space="preserve">Microsoft Visual Studio addon for Finance and Operations development (UDE Ready)</Description>
         <Icon>Functions.jpg</Icon>

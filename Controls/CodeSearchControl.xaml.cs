@@ -4,7 +4,9 @@ using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.Dynamics.Framework.Tools.MetaModel.Core;
 using Microsoft.Internal.VisualStudio.PlatformUI;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +18,9 @@ namespace Functions_for_Dynamics_Operations
     /// </summary>
     public partial class CodeSearchControl : UserControl
     {
+        private ListSortDirection _dir = ListSortDirection.Ascending;
+        private string _sortCol = null;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeSearchControl"/> class.
         /// </summary>
@@ -28,6 +33,40 @@ namespace Functions_for_Dynamics_Operations
             SearchDataGrid.AllowUserToResizeColumns = true;
 
             SearchDataGrid.CellMouseDoubleClick += SearchDataGrid_CellMouseDoubleClick;
+
+            SearchDataGrid.ColumnHeaderMouseClick += SearchDataGrid_ColumnHeaderMouseClick;
+        }
+
+        private void SearchDataGrid_ColumnHeaderMouseClick(object sender, System.Windows.Forms.DataGridViewCellMouseEventArgs e)
+        {
+            var col = SearchDataGrid.Columns[e.ColumnIndex];
+            var name = col.DataPropertyName;  // or col.Name
+            var list = (List<CodeSearchFound>)SearchDataGrid.DataSource;
+
+            // Toggle direction if same column clicked
+            if (_sortCol == name)
+                _dir = _dir == ListSortDirection.Ascending
+                       ? ListSortDirection.Descending
+                       : ListSortDirection.Ascending;
+            else
+            {
+                _sortCol = name;
+                _dir = ListSortDirection.Ascending;
+            }
+
+            // Use LINQ to sort
+            var sorted = (_dir == ListSortDirection.Ascending)
+               ? list.OrderBy(x => typeof(CodeSearchFound)
+                                  .GetProperty(name)
+                                  .GetValue(x))
+                     .ToList()
+               : list.OrderByDescending(x => typeof(CodeSearchFound)
+                                            .GetProperty(name)
+                                            .GetValue(x))
+                     .ToList();
+
+            // Rebind
+            SearchDataGrid.DataSource = sorted;
         }
 
         private void SearchDataGrid_CellMouseDoubleClick(object sender, System.Windows.Forms.DataGridViewCellMouseEventArgs e)

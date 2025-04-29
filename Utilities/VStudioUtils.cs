@@ -92,6 +92,8 @@ namespace Functions_for_Dynamics_Operations
 
         public static void LogToGenOutput(string text)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             IVsOutputWindow outWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
 
             // Use e.g. Tools -> Create GUID to make a stable, but unique GUID for your pane.
@@ -103,7 +105,7 @@ namespace Functions_for_Dynamics_Operations
             IVsOutputWindowPane customPane;
             outWindow.GetPane(ref customGuid, out customPane);
 
-            customPane.OutputString(text);
+            customPane.OutputString($"{Environment.NewLine}{text}");
             customPane.Activate(); // Brings this pane into view
         }
 

@@ -231,6 +231,8 @@ namespace Functions_for_Dynamics_Operations.Functions
             dataGridView.DataSource = codeSearchResults.SelectMany(result => result ?? new List<CodeSearchFound>()).ToList();
 
             GridUtils.SetGridLayoutSearchCode(dataGridView);
+
+            VStudioUtils.LogToGenOutput($"Searching finished");
         }
 
         internal void SearchForCode(string directory, List<Threader> threads)

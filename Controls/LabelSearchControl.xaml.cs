@@ -4,18 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls.Expressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace Functions_for_Dynamics_Operations
 {
     /// <summary>
     /// Interaction logic for LabelSearchControl.
     /// </summary>
-    public partial class LabelSearchControl : UserControl
+    public partial class LabelSearchControl : System.Windows.Controls.UserControl
     {
+        private ListSortDirection _dir = ListSortDirection.Ascending;
+        private string _sortCol = null;
         private int RowRightClick;
 
         /// <summary>
@@ -46,24 +50,34 @@ namespace Functions_for_Dynamics_Operations
 
         private void SearchDataGrid_ColumnHeaderMouseClick(object sender, System.Windows.Forms.DataGridViewCellMouseEventArgs e)
         {
-            System.Windows.Forms.SortOrder currentSort = SearchDataGrid.SortOrder;
-            // Check if this is the current column but then sorting has changed
-            if (e.ColumnIndex == SearchDataGrid.SortedColumn.Index)
-            {
-                switch(currentSort)
-                {
-                    case System.Windows.Forms.SortOrder.Ascending:
-                        SearchDataGrid.Sort(SearchDataGrid.Columns[e.ColumnIndex], ListSortDirection.Descending);
-                        break;
-                    case System.Windows.Forms.SortOrder.Descending:
-                        SearchDataGrid.Sort(SearchDataGrid.Columns[e.ColumnIndex], ListSortDirection.Ascending);
-                        break;
-                }
-            }
+            var col = SearchDataGrid.Columns[e.ColumnIndex];
+            var name = col.DataPropertyName;  // or col.Name
+            var list = (List<DLabelSearch>)SearchDataGrid.DataSource;
+
+            // Toggle direction if same column clicked
+            if (_sortCol == name)
+                _dir = _dir == ListSortDirection.Ascending
+                       ? ListSortDirection.Descending
+                       : ListSortDirection.Ascending;
             else
             {
-                SearchDataGrid.Sort(SearchDataGrid.Columns[e.ColumnIndex], ListSortDirection.Ascending);
+                _sortCol = name;
+                _dir = ListSortDirection.Ascending;
             }
+
+            // Use LINQ to sort
+            var sorted = (_dir == ListSortDirection.Ascending)
+               ? list.OrderBy(x => typeof(DLabelSearch)
+                                  .GetProperty(name)
+                                  .GetValue(x))
+                     .ToList()
+               : list.OrderByDescending(x => typeof(DLabelSearch)
+                                            .GetProperty(name)
+                                            .GetValue(x))
+                     .ToList();
+
+            // Rebind
+            SearchDataGrid.DataSource = sorted;
         }
 
         private void SearchText_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -120,9 +134,9 @@ namespace Functions_for_Dynamics_Operations
                 System.Windows.Forms.DataGridViewRow row = SearchDataGrid.Rows[RowRightClick];
 
                 if (row.Cells[1].Value.ToString().Substring(0, 1) == "@" && row.Cells[1].Value.ToString().Contains(row.Cells[0].Value.ToString()))
-                    Clipboard.SetText(string.Format("{0}", row.Cells[1].Value));
+                    System.Windows.Forms.Clipboard.SetText(string.Format("{0}", row.Cells[1].Value));
                 else
-                    Clipboard.SetText(string.Format("@{0}:{1}", row.Cells[0].Value, row.Cells[1].Value));
+                    System.Windows.Forms.Clipboard.SetText(string.Format("@{0}:{1}", row.Cells[0].Value, row.Cells[1].Value));
             }
         }
 
@@ -149,132 +163,5 @@ namespace Functions_for_Dynamics_Operations
                 ex.Log();
             }
         }
-
-        /*
-        internal void ColumnSortEvents()
-        {
-            
-        }
-
-        public void SearchForLabels(LabelSearchControl form)
-        {
-            form.SearchDataGrid.DataSource = SearchForLabelsTask(form.LanguageCombo.SelectedItem.ToString(), form.SearchText.Text, form.SearchType.SelectedItem.ToString());
-        }
-
-        public List<DLabelSearch> SearchForLabelsTask(string language, string textToSearch, string searchType)
-        {
-            List<DLabelSearch> labels = new List<DLabelSearch>();
-
-            if (textToSearch == "" || textToSearch.Replace(" ", "").Length == 0)
-                return labels;
-
-            string folder = Microsoft.Dynamics.Framework.Tools.Configuration.ConfigurationHelper.CurrentConfiguration.ModelStoreFolder;
-            if (!folder.IsNullOrEmpty())
-            {
-                DirectoryInfo directoryInfo = new DirectoryInfo(folder);
-
-                foreach (DirectoryInfo directories in directoryInfo.GetDirectories())
-                {
-                    if (Directory.Exists($@"{directories.FullName}\{directories.Name}\AxLabelFile\LabelResources\{language}"))
-                    {
-                        DirectoryInfo dirInfo = new DirectoryInfo($@"{directories.FullName}\{directories.Name}\AxLabelFile\LabelResources\{language}");
-
-                        foreach (FileInfo file in dirInfo.GetFiles())
-                        {
-                            if (file.Extension.ToLower() != ".txt")
-                                continue;
-
-                            string fileName = Path.GetFileName(file.FullName);
-                            string fileId = fileName.Substring(0, fileName.IndexOf('.'));
-
-                            string line = "";
-                            // Using the stream allows for multi fetching in the loop
-                            using (StreamReader fileStream = new StreamReader(file.FullName))
-                            {
-                                while (line != null)
-                                {
-                                    if (line == "")
-                                        line = fileStream.ReadLine();
-
-                                    // End of file
-                                    if (line == null)
-                                        break;
-
-                                    if (line.IsNullOrEmpty() || line == " ")
-                                    {
-                                        line = "";
-                                        continue;
-                                    }
-
-                                    if (line.Contains("=") && (line.Length >= 2 && line.Substring(0, 2) != " ;"))
-                                    {
-                                        // Try pick up the description
-                                        var possibleDescription = fileStream.ReadLine();
-
-                                        // This is a label - closest we will get
-                                        if (line.ToLower().Contains(textToSearch.ToLower()))
-                                        {
-                                            string id = line.Substring(0, line.IndexOf("="));
-
-                                            // Get the label
-                                            DLabelSearch dlabel = new DLabelSearch(fileId, id)
-                                            {
-                                                Text = line.Substring(line.IndexOf("=") + 1)
-                                            };
-
-                                            if (possibleDescription != null && possibleDescription.Length >= 2 && possibleDescription.Substring(0, 2) == " ;" && !possibleDescription.Contains("="))
-                                            {
-                                                dlabel.Description = possibleDescription.Replace(" ;", "");
-                                            }
-
-                                            if (searchType == "Exact")
-                                            {   // Exact match of the label being searched
-                                                if (dlabel.Text.ToLower() == textToSearch.ToLower())
-                                                    labels.Add(dlabel);
-                                            }
-                                            else
-                                                labels.Add(dlabel);
-                                        }
-                                        else if (searchType != "Exact" && possibleDescription != null && possibleDescription.Length >= 2 && possibleDescription.Substring(0, 2) == " ;" && !possibleDescription.Contains("="))
-                                        {
-                                            // The commetn matches our search
-                                            if (possibleDescription.ToLower().Contains(textToSearch.ToLower()))
-                                            {
-                                                string id = line.Substring(0, line.IndexOf("="));
-
-                                                // Get the label
-                                                DLabelSearch dlabel = new DLabelSearch(fileId, id)
-                                                {
-                                                    Text = line.Substring(line.IndexOf("=") + 1),
-                                                    Description = possibleDescription.Replace(" ;", "")
-                                                };
-
-                                                labels.Add(dlabel);
-                                            }
-                                        }
-
-                                        // The end of file
-                                        if (possibleDescription == null)
-                                            break;
-
-                                        // Scrub the line for the next label - either used from description or the next line
-                                        line = "";
-
-                                        if (possibleDescription.Contains("=") && (possibleDescription.Length >= 2 && possibleDescription.Substring(0, 2) != " ;"))
-                                        {
-                                            // This was thought to be a description - rework it as a label
-                                            line = possibleDescription;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return labels;
-        }
-        */
     }
 }
