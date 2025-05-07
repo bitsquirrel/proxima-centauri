@@ -76,6 +76,8 @@ namespace Functions_for_Dynamics_Operations
     {
         public static void LogToOutput(string text)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             if (Package.GetGlobalService(typeof(SVsOutputWindow)) is IVsOutputWindow outWindow)
             {
                 Guid generalPaneGuid = VSConstants.GUID_OutWindowGeneralPane;
@@ -83,7 +85,7 @@ namespace Functions_for_Dynamics_Operations
                 outWindow.GetPane(ref generalPaneGuid, out IVsOutputWindowPane generalPane);
                 if (generalPane != null)
                 {
-                    _ = generalPane.OutputStringThreadSafe(text);
+                    _ = generalPane.OutputStringThreadSafe($"{Environment.NewLine}{text}");
                     // Brings this pane into view
                     generalPane.Activate(); 
                 }

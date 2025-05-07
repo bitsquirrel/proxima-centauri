@@ -360,7 +360,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Functions.jpg">
+    <Content Include="Functions for Dynamics.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
