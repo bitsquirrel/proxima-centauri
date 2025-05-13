@@ -15,6 +15,7 @@ using Microsoft.Dynamics.AX.Metadata.Service;
 using Microsoft.Dynamics.AX.Metadata.Static.Access;
 using Microsoft.Dynamics.Framework.Tools.Core;
 using Functions_for_Dynamics_Operations.Functions;
+using System.ComponentModel;
 
 namespace Functions_for_Dynamics_Operations
 {

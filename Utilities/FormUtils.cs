@@ -1,18 +1,13 @@
 ﻿using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.Dynamics.AX.Metadata.Core.MetaModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Microsoft.Dynamics.Framework.Tools.FormControlExtension.QuickFilterControl;
 using Microsoft.Dynamics.AX.Metadata.Patterns;
 using Microsoft.Dynamics.AX.Metadata.MetaModel.Extensions;
 
 namespace Functions_for_Dynamics_Operations.Utilities
 {
-    internal class FormUtils
+    public class FormUtils
     {
         protected PatternFactory PatternFactory;
         protected AxForm Form;

@@ -1,16 +1,12 @@
-﻿using EnvDTE80;
-using Functions_for_Dynamics_Operations.Functions;
-using Microsoft.Dynamics.AX.Metadata.MetaModel;
-using Microsoft.Dynamics.Framework.Tools.MetaModel.Forms;
-using Microsoft.Dynamics.Framework.Tools.ProjectSystem;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using System;
+﻿using System;
 using System.ComponentModel.Design;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Functions_for_Dynamics_Operations.Functions;
+using Functions_for_Dynamics_Operations.ToolbaxCode;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
 
 namespace Functions_for_Dynamics_Operations
@@ -18,17 +14,17 @@ namespace Functions_for_Dynamics_Operations
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class CreateFormCommand
+    internal sealed class GenerateToolboxCommand
     {
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 3332;
+        public const int CommandId = 4332;
 
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("3a130553-9af1-45d5-ab49-55c2028cd892");
+        public static readonly Guid CommandSet = new Guid("18e89167-6f4e-4a92-8640-856c1837a099");
 
         /// <summary>
         /// VS Package that provides this command, not null.
@@ -36,12 +32,12 @@ namespace Functions_for_Dynamics_Operations
         private readonly AsyncPackage package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateFormCommand"/> class.
+        /// Initializes a new instance of the <see cref="GenerateToolboxCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private CreateFormCommand(AsyncPackage package, OleMenuCommandService commandService)
+        private GenerateToolboxCommand(AsyncPackage package, OleMenuCommandService commandService)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
@@ -54,7 +50,7 @@ namespace Functions_for_Dynamics_Operations
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static CreateFormCommand Instance
+        public static GenerateToolboxCommand Instance
         {
             get;
             private set;
@@ -77,12 +73,12 @@ namespace Functions_for_Dynamics_Operations
         /// <param name="package">Owner package, not null.</param>
         public static async Task InitializeAsync(AsyncPackage package)
         {
-            // Switch to the main thread - the call to AddCommand in CreateFormCommand's constructor requires
+            // Switch to the main thread - the call to AddCommand in GenerateToolboxCommand's constructor requires
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
             OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
-            Instance = new CreateFormCommand(package, commandService);
+            Instance = new GenerateToolboxCommand(package, commandService);
         }
 
         /// <summary>
@@ -98,44 +94,11 @@ namespace Functions_for_Dynamics_Operations
 
             try
             {
-                DTE2 dte = Package.GetGlobalService(typeof(SDTE)) as DTE2;
-
-                OAVSProjectFileItem oAVSProjectFileItem = (OAVSProjectFileItem)dte.SelectedItems.Item(1).ProjectItem;
-
-                if (oAVSProjectFileItem.Object != null)
-                {
-                    VSProjectFileNode vSProjectFileNode = (VSProjectFileNode)oAVSProjectFileItem.Object;
-                    Microsoft.Dynamics.Framework.Tools.MetaModel.Core.IDesignMetaModelService designMetaModel = VStudioUtils.GetDesignMetaModelService();
-
-                    ModelInfo modelInfo = VStudioUtils.GetActiveAXProjectModelInfo();
-
-                    switch (vSProjectFileNode.MetadataReference.MetadataType.Name)
-                    {
-                        case nameof(AxTable):
-                        case nameof(AxTableExtension):
-                            AxForm form = designMetaModel.GetForm(vSProjectFileNode.FileName);
-                            if (form == null)
-                            {
-                                new FormCreateFunc().CreateFormFromTable(vSProjectFileNode.FileName);
-                            }
-                            else
-                                new FormCreateFunc().SaveToProject(form.Name, form.GetType());
-                            break;
-                        case nameof(AxForm):
-                            AxForm Axform = designMetaModel.GetForm(vSProjectFileNode.FileName);
-                            if (Axform != null)
-                            {
-                                new FormCreateFunc().ApplyFormPattern(Axform);
-                            }
-                            else
-                                new FormCreateFunc().SaveToProject(Axform.Name, Axform.GetType());
-                            break;
-                    }
-                }
+                new GenToolbox().GenerateToolbox();
             }
             catch (ExceptionVsix ex)
             {
-                ex.Log("Unable to create form");
+                ex.Log("Unable to generate tool box objects");
             }
         }
     }

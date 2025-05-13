@@ -9,6 +9,8 @@ using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.Dynamics.Framework.Tools.ProjectSystem;
 using Microsoft.Dynamics.Framework.Tools.MetaModel.Core;
 using Microsoft.Dynamics.Framework.Tools.MetaModel.Menus;
+using Functions_for_Dynamics_Operations.Utilities;
+using Microsoft.Dynamics.AX.Metadata.Patterns;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -18,7 +20,6 @@ namespace Functions_for_Dynamics_Operations
         public string TypeGuid { get; set; }
         public List<string> Methods { get; set; }
         public object AxObject { get; set; }
-
 
         public ObjectAndTypeDetails(string objectName, string typeGuid, Object axObject = null)
         {
@@ -123,6 +124,93 @@ namespace Functions_for_Dynamics_Operations
     public class ClassFunc
     {
         private readonly string NewLine = Environment.NewLine;
+        protected PatternFactory PatternFactory;
+        internal List<string> CtrlNames;
+        protected string FormDataSource;
+        public FormUtils FormUtil;
+        protected AxForm Form;
+        internal bool Full;
+
+        internal virtual void CreateClassMethods()
+        {
+            // This is a placeholder for the class methods
+        }
+
+        internal CreateFormForm ShowCreateFormDialog(string _formName)
+        {
+            // This will allow the user to select the form design required
+            CreateFormForm CreateFormForm = new CreateFormForm
+            {
+                StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+            };
+
+            CreateFormForm.ShowDialog();
+            // Return and deal with the result
+            return CreateFormForm;
+        }
+
+        internal bool CreateForm(string formName)
+        {
+            CreateFormForm CreateFormForm = ShowCreateFormDialog(formName);
+
+            if (CreateFormForm.Ok)
+            {
+                Full = CreateFormForm.Full;
+
+                CtrlNames = new List<string>();
+
+                Form = new AxForm
+                {
+                    Name = formName
+                };
+
+                Form.Methods.Add(new AxMethod() { Name = "classDeclaration", Source = $"[Form]{Environment.NewLine}public class {formName} extends FormRun{Environment.NewLine}" + "{" + Environment.NewLine + "}" });
+
+                AxTable table = VStudioUtils.GetDesignMetaModelService().GetTable(formName);
+                if (table != null)
+                {
+                    // Add the data source
+                    AxFormDataSourceRoot dataSourceRoot = new AxFormDataSourceRoot()
+                    {
+                        InsertIfEmpty = Microsoft.Dynamics.AX.Metadata.Core.MetaModel.NoYes.No,
+                        Table = formName,
+                        Name = formName
+                    };
+                    // The fields need to be explicitly added for some reason
+                    foreach (var field in table.Fields)
+                    {
+                        dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = field.Name, DataField = field.Name });
+                    }
+                    // System fields are not part of the fields collection for some reason
+                    dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = "Partitian", DataField = "Partitian" });
+                    dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = "TableId", DataField = "TableId" });
+                    dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = "RecId", DataField = "RecId" });
+
+                    if (table.SaveDataPerCompany == Microsoft.Dynamics.AX.Metadata.Core.MetaModel.NoYes.Yes)
+                    {
+                        dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = "DataAreaId", DataField = "DataAreaId" });
+                    }
+
+                    Form.DataSources.Add(dataSourceRoot);
+
+                    FormDataSource = formName;
+                    // Use the label from the table
+                    Form.Design.Caption = table.Label;
+                }
+
+                PatternFactory = new PatternFactory(true);
+                FormUtil = new FormUtils(PatternFactory, Form);
+
+                ApplyPattern(CreateFormForm.FormPattern);
+            }
+
+            return CreateFormForm.Ok;
+        }
+
+        internal void ApplyPattern(string patternName)
+        {
+                        
+        }
 
         public void SaveToProject(string name, Type type, bool open = true)
         {
@@ -414,16 +502,16 @@ namespace Functions_for_Dynamics_Operations
             return classCreate;
         }
 
-        protected void AddclassToProject(AxClass classcreated)
+        protected void AddClassToProject(AxClass classCreated, bool openItemOnAdd = true)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
             List<MetadataReference> classToAdd = new List<MetadataReference>
             {
-                new MetadataReference(classcreated.Name, classcreated.GetType())
+                new MetadataReference(classCreated.Name, classCreated.GetType())
             };
 
-            VStudioUtils.GetSelectedProjectOrFirstActiveProject().AddModelElementsToProject(classToAdd, true);
+            VStudioUtils.GetSelectedProjectOrFirstActiveProject().AddModelElementsToProject(classToAdd, openItemOnAdd);
 
             EnvDTE80.DTE2 dte = (EnvDTE80.DTE2)Package.GetGlobalService(typeof(SDTE));
 

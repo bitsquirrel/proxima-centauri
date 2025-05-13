@@ -10,6 +10,7 @@ namespace Functions_for_Dynamics_Operations
     internal class ToolWindowsFunc
     {
         internal readonly AsyncPackage AsyncPackage;
+        internal ToolWindowPane Window;
 
         internal ToolWindowsFunc(AsyncPackage asyncPackage) { AsyncPackage = asyncPackage; }
     }

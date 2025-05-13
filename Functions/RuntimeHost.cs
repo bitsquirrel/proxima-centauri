@@ -24,6 +24,17 @@ namespace Functions_for_Dynamics_Operations.Functions
             return specificNode.InnerXml == "CloudRuntime";
         }
 
+        internal static string GetOneBoxConfigFileName()
+        {
+            // Pick up the default config (default is the config under the users documents) to check if we are cloud hosted
+            var defaultConfig = Microsoft.Dynamics.Framework.Tools.Configuration.ConfigurationHelper.InstalledConfigurationEntries.FirstOrDefault(a => a.Item1 == "DefaultConfig");
+            // The XML fails conversion dynamically - so load it direct to XML
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(File.ReadAllText(defaultConfig.Item2));
+            // This is a cloud hosted UDE environment
+            return xmlDocument.DocumentElement.Name;
+        }
+
         public static (string modelStoreFolder, string frameworkDirectory) GetModelStoreAndFrameworkDirectories()
         {
             // Now pickup the current metadata config that is active

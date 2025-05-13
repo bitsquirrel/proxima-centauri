@@ -11,6 +11,18 @@ namespace Functions_for_Dynamics_Operations
 
         }
 
+        internal bool StartRunCodeSearch()
+        {
+            // Create an instance per model being used
+            Window = AsyncPackage.FindToolWindow(typeof(CodeSearch), 0, true);
+            if ((null != Window) && (null != Window.Frame))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         internal void StopCodeSearch()
         {
             ThreadHelper.ThrowIfNotOnUIThread();

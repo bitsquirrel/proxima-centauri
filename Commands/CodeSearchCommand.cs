@@ -88,17 +88,20 @@ namespace Functions_for_Dynamics_Operations
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            // Get the instance number 0 of this tool window. This window is single instance so this instance
-            // is actually the only one.
-            // The last flag is set to true so that if the tool window does not exists it will be created.
-            ToolWindowPane window = this.package.FindToolWindow(typeof(CodeSearch), 0, true);
-            if ((null == window) || (null == window.Frame))
+            try
             {
-                throw new NotSupportedException("Cannot create tool window");
-            }
+                StartRunCodeSearchFunc startRunCodeSearch = new StartRunCodeSearchFunc(this.package);
 
-            IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
-            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+                if (startRunCodeSearch.StartRunCodeSearch())
+                {
+                    IVsWindowFrame windowFrame = (IVsWindowFrame)startRunCodeSearch.Window.Frame;
+                    Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+                }
+            }
+            catch (ExceptionVsix ex)
+            {
+                ex.Log("Unable to open code search");
+            }
         }
     }
 }

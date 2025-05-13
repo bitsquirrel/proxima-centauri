@@ -8,16 +8,11 @@ using System.Windows.Controls;
 
 namespace Functions_for_Dynamics_Operations
 {
-    internal class StartRunLabelEditorFunc
+    internal class StartRunLabelEditorFunc : ToolWindowsFunc
     {
-        private readonly AsyncPackage AsyncPackage;
-        public LabelEditorControl LabelEditor;
-        public ToolWindowPane Window;
+        public LabelEditorControl LabelEditor;      
 
-        public StartRunLabelEditorFunc(AsyncPackage package)
-        {
-            AsyncPackage = package;
-        }
+        public StartRunLabelEditorFunc(AsyncPackage asyncPackage) : base(asyncPackage) { }
 
         /// <summary>
         /// Centralize the label start and or check if started

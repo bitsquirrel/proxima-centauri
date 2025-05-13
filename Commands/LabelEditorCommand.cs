@@ -96,9 +96,9 @@ namespace Functions_for_Dynamics_Operations
                     Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
                 }
             }
-            catch (Exception ex)
+            catch (ExceptionVsix ex)
             {
-                System.Windows.Forms.MessageBox.Show($"Error on label editor : {ex}");
+                ex.Log("Unable to open label editor");
             }
         }
     }

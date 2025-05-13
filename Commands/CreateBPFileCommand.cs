@@ -87,7 +87,14 @@ namespace Functions_for_Dynamics_Operations
 
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            new BestPracticeFunc(VStudioUtils.GetActiveAXProjectModelInfo());
+            try
+            {
+                new BestPracticeFunc(VStudioUtils.GetActiveAXProjectModelInfo());
+            }
+            catch (ExceptionVsix ex)
+            {
+                ex.Log("Unable to create Best Practice file");
+            }
         }
     }
 }

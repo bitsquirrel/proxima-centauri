@@ -63,6 +63,16 @@
     <Compile Include="Forms\CreateFormForm.Designer.cs">
       <DependentUpon>CreateFormForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PrefixForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PrefixForm.Designer.cs">
+      <DependentUpon>PrefixForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\GenLabelsProjectCommand.cs" />
+    <Compile Include="Functions\GenLabelsForProjectItems.cs" />
+    <Compile Include="ToolbaxCode\ExceptionCode.cs" />
+    <Compile Include="ToolbaxCode\GenToolbox.cs" />
     <Compile Include="Functions\StartRunCodeSearchFunc.cs" />
     <Compile Include="Functions\SearchFunctionCode.cs" />
     <Compile Include="Commands\RunBestPracticeCommand.cs" />
@@ -73,8 +83,13 @@
     <Compile Include="Functions\RuntimeHost.cs" />
     <Compile Include="Functions\StartRunLabelSearchFunc.cs" />
     <Compile Include="Functions\ToolWindows.cs" />
+    <Compile Include="Commands\GenerateToolboxCommand.cs" />
     <Compile Include="Objects\CurrentMetadataConfig.cs" />
     <Compile Include="Objects\Enums.cs" />
+    <Compile Include="ToolbaxCode\EnumsCode.cs" />
+    <Compile Include="ToolbaxCode\SysOpBaseCode.cs" />
+    <Compile Include="ToolbaxCode\SysOpContractCode.cs" />
+    <Compile Include="ToolbaxCode\UtilsCode.cs" />
     <Compile Include="Tools\CodeSearch.cs" />
     <Compile Include="Commands\CodeSearchCommand.cs" />
     <Compile Include="Controls\CodeSearchControl.xaml.cs">
@@ -253,6 +268,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\UDE\Dlls\Microsoft.Dynamics.Framework.Tools.FormControlExtension.17.0.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.LabelEditor.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\UDE\Dlls\Microsoft.Dynamics.Framework.Tools.LabelEditor.17.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.Labels.Resolvers, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\UDE\Dlls\Microsoft.Dynamics.Framework.Tools.Labels.Resolvers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Dynamics.Framework.Tools.MetaModel.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\UDE\Dlls\Microsoft.Dynamics.Framework.Tools.MetaModel.17.0.dll</HintPath>
@@ -366,6 +389,8 @@
     </Content>
     <Content Include="Resources\BPEditorCommand.png" />
     <Content Include="Resources\CodeSearchCommand.png" />
+    <Content Include="Resources\CreateToolbox.png" />
+    <Content Include="Resources\GenerateToolboxCommand.png" />
     <Content Include="Resources\LabelSearchCommand.png" />
     <Content Include="Resources\New.png" />
     <Content Include="Resources\RunBestPractice.png" />
@@ -378,7 +403,11 @@
     <EmbeddedResource Include="Forms\CreateFormForm.resx">
       <DependentUpon>CreateFormForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PrefixForm.resx">
+      <DependentUpon>PrefixForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

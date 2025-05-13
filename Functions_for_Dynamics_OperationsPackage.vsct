@@ -58,6 +58,11 @@
       <Group guid="bestPracticeCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE" />
       </Group>
+		
+		<Group guid="projectNodeCmdSetTwo" id="ProjectNodeGroup" priority="0x0600">
+			<Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE" />
+		</Group>
+		
       <Group guid="incodeLabelCmdSet" id="incodeLabelGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
       </Group>
@@ -145,31 +150,41 @@
       </Button>
       <Button guid="tableToContractCmdSet" id="cmdidCreateDataEntity" priority="0x0102" type="Button">
         <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+		<Icon guid="guidImages5" id="bmpPicX" />
         <Strings>
           <ButtonText>Create data entity</ButtonText>
         </Strings>
       </Button>
       <Button guid="tableToContractCmdSet" id="cmdidCreatePrivielegesCommand" priority="0x0103" type="Button">
         <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+		<Icon guid="guidImages" id="bmpPic2" />
         <Strings>
           <ButtonText>Create privileges</ButtonText>
         </Strings>
       </Button>
       <Button guid="tableToContractCmdSet" id="cmdidLabelsCommand" priority="0x0104" type="Button">
         <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+		<Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <ButtonText>Generate labels</ButtonText>
         </Strings>
       </Button>
-
-      <!--
-      <Button guid="tableToContractCmdSet" id="cmdidTableToCtrctCmd" priority="0x0102" type="Button">
-        <Parent guid="tableToContractCmdSet" id="TableContractGroup" />
+		
+	  <!-- This command is used to generate the toolbox command -->
+      <Button guid="projectNodeCmdSetTwo" id="cmdidGenerateToolboxCommand" priority="0x0100" type="Button">
+        <Parent guid="projectNodeCmdSetTwo" id="ProjectNodeGroup" />
+		  <Icon guid="guidImages4" id="bmpPic1" />  
         <Strings>
-          <ButtonText>Table to contract</ButtonText>
+          <ButtonText>Generate tool objects</ButtonText>
         </Strings>
       </Button>
-      -->
+		<Button guid="projectNodeCmdSetTwo" id="cmdidGenLabelsProjectCommand" priority="0x0101" type="Button">
+			<Parent guid="projectNodeCmdSetTwo" id="ProjectNodeGroup" />
+			<Icon guid="guidImages" id="bmpPic1" />
+			<Strings>
+				<ButtonText>Generate labels for Project</ButtonText>
+			</Strings>
+		</Button>
 
       
       <Button guid="incodeLabelCmdSet" id="cmdidSearchLabelInCode" priority="0x0100" type="Button">
@@ -296,7 +311,7 @@
           <ButtonText>Export models excel</ButtonText>
         </Strings>
       </Button>
-
+		
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -312,6 +327,7 @@
       <Bitmap guid="guidImages3" href="Resources\CodeSearchCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
       <Bitmap guid="guidImages4" href="Resources\RunBestPractice.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
       <Bitmap guid="guidImages5" href="Resources\New.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages6" href="Resources\CreateToolbox.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
   </Commands>
 
@@ -347,6 +363,12 @@
       <IDSymbol name="MyCommandGroup" value="0x0100" />
       <IDSymbol name="cmdidClassEventsCommand" value="311" />
     </GuidSymbol>
+
+	<GuidSymbol name="projectNodeCmdSetTwo" value="{18e89167-6f4e-4a92-8640-856c1837a099}">
+		<IDSymbol name="cmdidGenLabelsProjectCommand" value="4333" />
+		<IDSymbol name="cmdidGenerateToolboxCommand" value="4332" />
+		<IDSymbol name="ProjectNodeGroup" value="0x1020" />
+	</GuidSymbol>  
 
     <GuidSymbol name="projectNodeCmdSet" value="{bfb0546c-ad20-4f59-9e55-e6467808e2be}">
       <IDSymbol name="cmdidClassCmd" value="257" />
@@ -461,7 +483,15 @@
       <IDSymbol name="bmpPicArrows" value="5" />
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
-
   
+    <GuidSymbol value="{2c0c1ff0-c644-43d3-80ec-e74f4839b835}" name="guidImages6">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+
   </Symbols>
 </CommandTable>

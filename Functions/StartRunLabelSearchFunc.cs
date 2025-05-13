@@ -1,4 +1,5 @@
-﻿using Microsoft.Dynamics.AX.Metadata.MetaModel;
+﻿using System;
+using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
@@ -6,8 +7,17 @@ namespace Functions_for_Dynamics_Operations
 {
     internal class StartRunLabelSearchFunc : ToolWindowsFunc
     {
-        internal StartRunLabelSearchFunc(AsyncPackage asyncPackage) : base(asyncPackage)
+        internal StartRunLabelSearchFunc(AsyncPackage asyncPackage) : base(asyncPackage) { }
+
+        internal bool StartRunLabelSearch()
         {
+            Window = AsyncPackage.FindToolWindow(typeof(LabelSearch), 0, true);
+            if ((null != Window) || (null != Window.Frame))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         internal void StopLabelSearch()

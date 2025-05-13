@@ -11,14 +11,14 @@ namespace Functions_for_Dynamics_Operations
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            VStudioUtils.LogToOutput(ToString());
+            VStudioUtils.LogToGenOutput(ToString());
         }
 
         public void Log(string log)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            VStudioUtils.LogToOutput($"{log} - Exception : {ToString()}");
+            VStudioUtils.LogToGenOutput($"{log} - Exception : {ToString()}");
         }
     }
 }

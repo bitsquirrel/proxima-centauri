@@ -92,6 +92,8 @@ namespace Functions_for_Dynamics_Operations
 
             try
             {
+                throw new Exception("this is a test for the debug writeline");
+
                 StartRunBPEditorFunc startRun = new StartRunBPEditorFunc(package);
                 // When called from here, it will create a new instance of the editor
                 if (startRun.StartRunBPEditor(true))
@@ -100,9 +102,9 @@ namespace Functions_for_Dynamics_Operations
                     ErrorHandler.ThrowOnFailure(windowFrame.Show());
                 }
             }
-            catch (Exception ex)
+            catch (ExceptionVsix ex)
             {
-                System.Windows.Forms.MessageBox.Show($"Error on BP editor : {ex}");
+                ex.Log("Unable to open Best Practice Editor");
             }
         }
     }

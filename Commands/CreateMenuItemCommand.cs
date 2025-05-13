@@ -122,7 +122,7 @@ namespace Functions_for_Dynamics_Operations
             }
             catch (ExceptionVsix ex)
             {
-                ex.Log();
+                ex.Log("Unable to create menu item");
             }
         }
 

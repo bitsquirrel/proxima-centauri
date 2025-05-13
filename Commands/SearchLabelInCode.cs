@@ -124,7 +124,7 @@ namespace Functions_for_Dynamics_Operations
             }
             catch (ExceptionVsix ex)
             {
-                ex.Log();
+                ex.Log("Unable to search for label in code");
             }
         }
     }

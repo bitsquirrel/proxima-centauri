@@ -122,7 +122,7 @@
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "CreateFormForm";
             this.Tag = "";
-            this.Text = "Form";
+            this.Text = "Patterns";
             this.ResumeLayout(false);
             this.PerformLayout();
 

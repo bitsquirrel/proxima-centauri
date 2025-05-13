@@ -98,7 +98,7 @@ namespace Functions_for_Dynamics_Operations
             }
             catch (ExceptionVsix ex)
             {
-                ex.Log();
+                ex.Log("Failed to create try catch final code");
             }
         }
     }

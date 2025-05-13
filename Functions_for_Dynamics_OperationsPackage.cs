@@ -92,6 +92,8 @@ namespace Functions_for_Dynamics_Operations
             await ExportModels.InitializeAsync(this).ConfigureAwait(false);
             await SearchLabelInCode.InitializeAsync(this).ConfigureAwait(false);
             await CreateDataEntity.InitializeAsync(this).ConfigureAwait(false);
+            await GenerateToolboxCommand.InitializeAsync(this).ConfigureAwait(false);
+            await GenLabelsProjectCommand.InitializeAsync(this).ConfigureAwait(false);
 
             AdviseSolutionEvents();
         }
@@ -160,6 +162,8 @@ namespace Functions_for_Dynamics_Operations
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
+            // For now we will not allow the project to open the tool windows
+            /*
             StartRunLabelEditorFunc startRunLabel = new StartRunLabelEditorFunc(this);
             // When called from here, do not create a new instance of the editor
             if (startRunLabel.StartRunLabelEditor(false))
@@ -175,10 +179,12 @@ namespace Functions_for_Dynamics_Operations
                 IVsWindowFrame windowFrame = (IVsWindowFrame)startRun.Window.Frame;
                 ErrorHandler.ThrowOnFailure(windowFrame.Show());
             }
+            */
         }
 
         private void OnCloseToolWindow()
         {
+            // We need to close the tool windows when the project is closed, otherwise the events are triggered randomly opening the tool windows
             new StartRunLabelSearchFunc(this).StopLabelSearch();
 
             new StartRunLabelEditorFunc(this).StopLabelEditor();

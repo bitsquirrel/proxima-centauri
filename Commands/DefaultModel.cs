@@ -104,26 +104,35 @@ namespace Functions_for_Dynamics_Operations
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            ModelInfo model = VStudioUtils.GetActiveAXProjectModelInfo();
-            if (!model.IsNull())
+            try
             {
-                if (RuntimeHost.IsCloudHosted())
+                ModelInfo model = VStudioUtils.GetActiveAXProjectModelInfo();
+                if (!model.IsNull())
                 {
-                    JObject jsonResponse = JObject.Parse(RuntimeHost.GetCloudHostedCurrentConfig());
-
-                    jsonResponse["DefaultModelForNewProjects"] = model.Name;
-
-                    RuntimeHost.SaveCloudHostedCurrentConfig(jsonResponse.ToString());
-                }
-                else
-                {
-                    Microsoft.Dynamics.Framework.Tools.Configuration.DevelopmentConfiguration developmentConfiguration = new Microsoft.Dynamics.Framework.Tools.Configuration.DevelopmentConfiguration
+                    if (RuntimeHost.IsCloudHosted())
                     {
-                        DefaultModelForNewProjects = model.Name
-                    };
+                        JObject jsonResponse = JObject.Parse(RuntimeHost.GetCloudHostedCurrentConfig());
 
-                    Microsoft.Dynamics.Framework.Tools.Configuration.ConfigurationHelper.SaveConfiguration("DefaultConfig", developmentConfiguration);
+                        jsonResponse["DefaultModelForNewProjects"] = model.Name;
+
+                        RuntimeHost.SaveCloudHostedCurrentConfig(jsonResponse.ToString());
+                    }
+                    else
+                    {
+                        Microsoft.Dynamics.Framework.Tools.Configuration.DevelopmentConfiguration developmentConfiguration = new Microsoft.Dynamics.Framework.Tools.Configuration.DevelopmentConfiguration
+                        {
+                            DefaultModelForNewProjects = model.Name
+                        };
+
+                        string configFileName = RuntimeHost.GetOneBoxConfigFileName();
+                        // Microsoft changed the name of the config file and its internal so we need to manually set it
+                        Microsoft.Dynamics.Framework.Tools.Configuration.ConfigurationHelper.SaveConfiguration(configFileName, developmentConfiguration);
+                    }
                 }
+            }
+            catch (ExceptionVsix ex)
+            {
+                ex.Log("Unable to set default model");
             }
         }
     }

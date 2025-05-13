@@ -149,6 +149,7 @@ namespace Functions_for_Dynamics_Operations
 
         private void PrimaryLabelGridView_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
+            // This is on hold until further testing can be done
             /*
             DataGridView dgv = (DataGridView)sender;
             if (dgv != null)
@@ -167,6 +168,7 @@ namespace Functions_for_Dynamics_Operations
 
         private void PrimaryLabelGridView_SelectionChanged(object sender, EventArgs e)
         {
+            // This is on hold until further testing can be done
             /*
             if (RowAdded != 0)
             {
@@ -264,9 +266,17 @@ namespace Functions_for_Dynamics_Operations
                             if (labelValues.TryGetValue(LabelFileSelected.Language, out Label label))
                             {   // See if the language for that label already exists
                                 if (label.Text.ToLower() == text.ToLower())
+                                {
                                     labelTextToCreateLabel = $"@{LabelFileCollectionSelected.Id}:{id}";
+                                }
                                 else
-                                    labelTextToCreateLabel = $"TEXT DIFFERS || {text} || {label.Text}";
+                                {
+                                    // Language text for the id exists but is different, inform the user rather than create a new label
+                                    VStudioUtils.LogToGenOutput($"Create label failed,the label Id already exists and the text for {id} is different - {label.Text} != {text}{Environment.NewLine}");
+                                    // labelTextToCreateLabel = $"TEXT DIFFERS || {text} || {label.Text}";
+                                    // Rather than send a different text, just return the original label id
+                                    return labelTextToCreateLabel;
+                                }
                             }
                             else
                             {   // Language text for the id does not exist yet - New label has no description that existed
@@ -1039,7 +1049,7 @@ namespace Functions_for_Dynamics_Operations
                 {
                     if (label.Value.Count != LabelFileCollectionSelected.Files.Count)
                     {
-                        VStudioUtils.LogToGenOutput($"Count differs for label {label.Key}");
+                        VStudioUtils.LogToGenOutput($"label {label.Key} does not exist in all languages only {label.Value.Count}");
                     }
                 }
 

@@ -16,18 +16,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Functions_for_Dynamics_Operations
 {
     internal class FormCreateFunc : ClassFunc
     {
         internal const string FormDesign = "FormDesign";
-        protected PatternFactory PatternFactory;
-        internal List<string> CtrlNames;
-        protected string FormDataSource;
-        public FormUtils FormUtil;
-        public AxForm Form;
-        internal bool Full;
 
         public void CreateFormFromTable(string formName)
         {
@@ -40,6 +35,18 @@ namespace Functions_for_Dynamics_Operations
                 vSProjectNode.DesignMetaModelService.CurrentMetadataProvider.Forms.Create(Form, new ModelSaveInfo(vSProjectNode.GetProjectsModelInfo()));
                 // Add the form to the active project
                 SaveToProject(Form.Name, Form.GetType());
+            }
+        }
+
+        internal void SelectFormPatternApplyPattern(string formName)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+            // The form exists but the pattern is not applied
+            CreateFormForm createFormForm = ShowCreateFormDialog(formName);
+            if (createFormForm.Ok)
+            {
+                // Apply the pattern to the form as selected in the dialog
+                ApplyPattern(createFormForm.FormPattern);
             }
         }
 
@@ -60,6 +67,11 @@ namespace Functions_for_Dynamics_Operations
                 VSProjectNode vSProjectNode = VStudioUtils.GetSelectedProjectOrFirstActiveProject();
                 vSProjectNode.DesignMetaModelService.CurrentMetadataProvider.Forms.Update(Form, new ModelSaveInfo(vSProjectNode.GetProjectsModelInfo()));
             }
+            else
+            {
+                // Allow the user to select a pattern to apply
+                SelectFormPatternApplyPattern(Form.Name);
+            }
         }
 
         protected void CompileForm()
@@ -78,71 +90,7 @@ namespace Functions_for_Dynamics_Operations
             buildHelper.CompileElements(designMetaModelService.CurrentMetadataProvider, System.Threading.CancellationToken.None, modelElementCompilationDescriptors, CompileMode.Incremental, projectNode.GetProjectsModelInfo(), true);
         }
 
-        protected bool CreateForm(string formName)
-        {
-            // This will allow the user to select the form design required
-            CreateFormForm CreateFormForm = new CreateFormForm
-            {
-                StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-            };
-
-            CreateFormForm.ShowDialog();
-
-            if (CreateFormForm.Ok)
-            {
-                Full = CreateFormForm.Full;
-
-                CtrlNames = new List<string>();
-
-                Form = new AxForm
-                {
-                    Name = formName
-                };
-
-                Form.Methods.Add(new AxMethod() { Name = "classDeclaration", Source = $"[Form]{Environment.NewLine}public class {formName} extends FormRun{Environment.NewLine}" + "{" + Environment.NewLine + "}" });
-
-                AxTable table = VStudioUtils.GetDesignMetaModelService().GetTable(formName);
-                if (table != null)
-                {
-                    // Add the data source
-                    AxFormDataSourceRoot dataSourceRoot = new AxFormDataSourceRoot()
-                    {
-                        InsertIfEmpty = Microsoft.Dynamics.AX.Metadata.Core.MetaModel.NoYes.No,
-                        Table = formName,
-                        Name = formName 
-                    };
-                    // The fields need to be explicitly added for some reason
-                    foreach (var field in table.Fields)
-                    {
-                        dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = field.Name, DataField = field.Name });
-                    }
-                    // System fields are not part of the fields collection for some reason
-                    dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = "Partitian", DataField = "Partitian" });
-                    dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = "TableId", DataField = "TableId" });
-                    dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = "RecId", DataField = "RecId" });
-
-                    if (table.SaveDataPerCompany == Microsoft.Dynamics.AX.Metadata.Core.MetaModel.NoYes.Yes)
-                    {
-                        dataSourceRoot.Fields.Add(new AxFormDataSourceField() { Name = "DataAreaId", DataField = "DataAreaId" });
-                    }
-
-                    Form.DataSources.Add(dataSourceRoot);
-
-                    FormDataSource = formName;
-                    // Use the label from the table
-                    Form.Design.Caption = table.Label;
-                }
-
-                PatternFactory = new PatternFactory(true);
-                FormUtil = new FormUtils(PatternFactory, Form);
-
-                ApplyPattern(CreateFormForm.FormPattern);
-            }
-
-            return CreateFormForm.Ok;
-        }
-
-        protected void ApplyPattern(string patternName)
+        internal new void ApplyPattern(string patternName)
         {
             var pattern = PatternFactory.AllPatterns.FirstOrDefault(i => i.FriendlyName.ToLower() == patternName.ToLower());
 

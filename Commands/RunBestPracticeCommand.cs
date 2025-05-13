@@ -92,11 +92,19 @@ namespace Functions_for_Dynamics_Operations
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            BestPracticeFixerVSRunner bestPractice = new BestPracticeFixerVSRunner();
+            try
+            {
+                BestPracticeFixerVSRunner bestPractice = new BestPracticeFixerVSRunner();
 
-            ProjectNode projectNode = VStudioUtils.GetSelectedProjectNodeForBP();
+                ProjectNode projectNode = VStudioUtils.GetSelectedProjectNodeForBP();
 
-            bestPractice.RunBPFixersOnProject(projectNode);
+                bestPractice.RunBPFixersOnProject(projectNode);
+            }
+            catch (ExceptionVsix ex)
+            {
+                ex.Log("Unable to run best practice checker");
+
+            }
         }
     }
 }
