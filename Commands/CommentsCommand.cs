@@ -20,7 +20,6 @@ namespace Functions_for_Dynamics_Operations
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        // public static readonly Guid CommandSet = new Guid("1bcd2185-d31c-43cf-a549-db1401fbf9c6");
         public static readonly Guid CommandSet = new Guid("34c200eb-bc9e-45af-9e9f-a9cb1a4e7668");
 
         /// <summary>

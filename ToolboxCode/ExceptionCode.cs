@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Dynamics.AX.Metadata.Core.MetaModel;
 using Microsoft.Dynamics.AX.Metadata.MetaModel;
 
-namespace Functions_for_Dynamics_Operations.ToolbaxCode
+namespace Functions_for_Dynamics_Operations.ToolboxCode
 {
     internal class ExceptionCode : GenToolbox
     {

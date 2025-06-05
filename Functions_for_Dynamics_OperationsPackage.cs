@@ -1,9 +1,7 @@
-﻿using EnvDTE;
-using Functions_for_Dynamics_Operations.Utilities;
+﻿using Functions_for_Dynamics_Operations.Utilities;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.Threading;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -66,8 +64,6 @@ namespace Functions_for_Dynamics_Operations
             await LabelSearchCommand.InitializeAsync(this).ConfigureAwait(false);
             await CodeSearchCommand.InitializeAsync(this).ConfigureAwait(false);
             await BPEditorCommand.InitializeAsync(this).ConfigureAwait(false);
-
-            await AppExpTableToContractCommand.InitializeAsync(this).ConfigureAwait(true);
             await CreateLabelInCodeCommand.InitializeAsync(this).ConfigureAwait(true);
             await CreateParmMethodCommand.InitializeAsync(this).ConfigureAwait(true);
             await RunBestPracticeCommand.InitializeAsync(this).ConfigureAwait(false);

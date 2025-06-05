@@ -113,14 +113,14 @@
       </Button>
       <Button guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="cmdidCodeSearchCommand" priority="0x0102" type="Button">
         <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" />
-        <Icon guid="guidImages3" id="bmpPicSearch" />
+        <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <ButtonText>Code Search</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="cmdidBPEditorCommand" priority="0x0103" type="Button">
         <Parent guid="guidFunctions_for_Dynamics_OperationsPackageCmdSet" id="MyMenuGroup" />
-        <Icon guid="guidImages2" id="bmpPicArrows" />
+        <Icon guid="guidImages" id="bmpPicArrows" />
         <Strings>
           <ButtonText>Best Practice Editor</ButtonText>
         </Strings>
@@ -170,12 +170,12 @@
         </Strings>
       </Button>
 		
-	  <!-- This command is used to generate the toolbox command -->
+	  <!-- This command is used to generate the toolbox code -->
       <Button guid="projectNodeCmdSetTwo" id="cmdidGenerateToolboxCommand" priority="0x0100" type="Button">
         <Parent guid="projectNodeCmdSetTwo" id="ProjectNodeGroup" />
 		  <Icon guid="guidImages4" id="bmpPic1" />  
         <Strings>
-          <ButtonText>Generate tool objects</ButtonText>
+          <ButtonText>Generate toolbox objects</ButtonText>
         </Strings>
       </Button>
 		<Button guid="projectNodeCmdSetTwo" id="cmdidGenLabelsProjectCommand" priority="0x0101" type="Button">
@@ -322,12 +322,8 @@
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
       <Bitmap guid="guidImages" href="Resources\LabelEditorCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages1" href="Resources\LabelSearchCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages2" href="Resources\BPEditorCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages3" href="Resources\CodeSearchCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
       <Bitmap guid="guidImages4" href="Resources\RunBestPractice.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
       <Bitmap guid="guidImages5" href="Resources\New.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages6" href="Resources\CreateToolbox.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
   </Commands>
 
@@ -434,36 +430,9 @@
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
   
-    <GuidSymbol value="{6cf98c26-0d7a-4444-9abc-3bacaf8f79fd}" name="guidImages1">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
-  
-    <GuidSymbol value="{a210c9fe-6780-49ef-a4a1-416990f3e7d3}" name="guidImages2">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
-  
     <GuidSymbol value="{649671fd-dff9-4538-ac91-e437d04920f2}" name="guidFunctions_for_Dynamics_OperationsPackageCmdSet1">
       <IDSymbol value="4128" name="MyMenuGroup" />
       <IDSymbol value="7485" name="cmdidDefaultModel" />
-    </GuidSymbol>
-
-    <GuidSymbol value="{b22a97b7-9435-4f4a-b679-0b4e4e1ddabd}" name="guidImages3">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
   
     <GuidSymbol value="{350c9bd6-3df4-4d36-8d00-839afccc867e}" name="guidImages4">
@@ -476,15 +445,6 @@
     </GuidSymbol>
 
     <GuidSymbol value="{8bdc02d4-71f0-4d87-b6fe-9be6307a2eca}" name="guidImages5">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
-  
-    <GuidSymbol value="{2c0c1ff0-c644-43d3-80ec-e74f4839b835}" name="guidImages6">
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />

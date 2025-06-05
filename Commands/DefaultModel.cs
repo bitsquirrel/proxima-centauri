@@ -1,25 +1,11 @@
-﻿using Microsoft.Dynamics.AX.Metadata.MetaModel;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using MSXML;
-using System;
-using System.ComponentModel.Design;
-using System.Globalization;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using Functions_for_Dynamics_Operations.Functions;
+using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Task = System.Threading.Tasks.Task;
-using System.Linq;
-using EnvDTE;
-using Microsoft.VisualBasic.ApplicationServices;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
-using System.Windows.Media;
-using Microsoft.Dynamics.Framework.Tools.ProjectSupport;
-using Functions_for_Dynamics_Operations.Functions;
-using System.Text.Json.Nodes;
-using Microsoft.Office.Interop.Excel;
+using Microsoft.VisualStudio.Shell;
+using System.ComponentModel.Design;
 using Newtonsoft.Json.Linq;
+using System.Windows.Forms;
+using System;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -116,6 +102,8 @@ namespace Functions_for_Dynamics_Operations
                         jsonResponse["DefaultModelForNewProjects"] = model.Name;
 
                         RuntimeHost.SaveCloudHostedCurrentConfig(jsonResponse.ToString());
+
+                        MessageBox.Show($"Default model set to {model.Name} in the cloud hosted environment{Environment.NewLine}You need to restart Visual Studio for this to take effect", "Default Model", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
                     }
                     else
                     {
