@@ -71,8 +71,8 @@
     </Compile>
     <Compile Include="Commands\GenLabelsProjectCommand.cs" />
     <Compile Include="Functions\GenLabelsForProjectItems.cs" />
-    <Compile Include="ToolbaxCode\ExceptionCode.cs" />
-    <Compile Include="ToolbaxCode\GenToolbox.cs" />
+    <Compile Include="ToolboxCode\ExceptionCode.cs" />
+    <Compile Include="ToolboxCode\GenToolbox.cs" />
     <Compile Include="Functions\StartRunCodeSearchFunc.cs" />
     <Compile Include="Functions\SearchFunctionCode.cs" />
     <Compile Include="Commands\RunBestPracticeCommand.cs" />
@@ -86,16 +86,15 @@
     <Compile Include="Commands\GenerateToolboxCommand.cs" />
     <Compile Include="Objects\CurrentMetadataConfig.cs" />
     <Compile Include="Objects\Enums.cs" />
-    <Compile Include="ToolbaxCode\EnumsCode.cs" />
-    <Compile Include="ToolbaxCode\SysOpBaseCode.cs" />
-    <Compile Include="ToolbaxCode\SysOpContractCode.cs" />
-    <Compile Include="ToolbaxCode\UtilsCode.cs" />
+    <Compile Include="ToolboxCode\EnumsCode.cs" />
+    <Compile Include="ToolboxCode\SysOpBaseCode.cs" />
+    <Compile Include="ToolboxCode\SysOpContractCode.cs" />
+    <Compile Include="ToolboxCode\UtilsCode.cs" />
     <Compile Include="Tools\CodeSearch.cs" />
     <Compile Include="Commands\CodeSearchCommand.cs" />
     <Compile Include="Controls\CodeSearchControl.xaml.cs">
       <DependentUpon>CodeSearchControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\AppExpTableToContractCommand.cs" />
     <Compile Include="Commands\CommentsCommand.cs" />
     <Compile Include="Commands\ConstructMethodCommand.cs" />
     <Compile Include="Commands\CreateBPFileCommand.cs" />
@@ -387,11 +386,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Resources\BPEditorCommand.png" />
-    <Content Include="Resources\CodeSearchCommand.png" />
-    <Content Include="Resources\CreateToolbox.png" />
-    <Content Include="Resources\GenerateToolboxCommand.png" />
-    <Content Include="Resources\LabelSearchCommand.png" />
     <Content Include="Resources\New.png" />
     <Content Include="Resources\RunBestPractice.png" />
     <VSCTCompile Include="Functions_for_Dynamics_OperationsPackage.vsct">

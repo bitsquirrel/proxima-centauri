@@ -92,8 +92,6 @@ namespace Functions_for_Dynamics_Operations
 
             try
             {
-                throw new Exception("this is a test for the debug writeline");
-
                 StartRunBPEditorFunc startRun = new StartRunBPEditorFunc(package);
                 // When called from here, it will create a new instance of the editor
                 if (startRun.StartRunBPEditor(true))

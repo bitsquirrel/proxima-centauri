@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Dynamics.AX.Metadata.Core.MetaModel;
 using Microsoft.Dynamics.AX.Metadata.MetaModel;
-using Microsoft.Dynamics.Framework.Tools.ProjectSupport;
 using Microsoft.Dynamics.Framework.Tools.ProjectSystem;
 
-namespace Functions_for_Dynamics_Operations.ToolbaxCode
+namespace Functions_for_Dynamics_Operations.ToolboxCode
 {
     internal class SysOpContractCode : GenToolbox
     {

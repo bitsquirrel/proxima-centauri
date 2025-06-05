@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
-using EnvDTE;
 using Functions_for_Dynamics_Operations.Forms;
-using Functions_for_Dynamics_Operations.ToolbaxCode;
 using Microsoft.Dynamics.AX.Metadata.MetaModel;
-using Microsoft.Dynamics.Framework.Tools.ProjectSupport;
 using Microsoft.Dynamics.Framework.Tools.ProjectSystem;
-using Microsoft.VisualStudio.Shell;
 
-namespace Functions_for_Dynamics_Operations.ToolbaxCode
+namespace Functions_for_Dynamics_Operations.ToolboxCode
 {
     internal class GenToolbox : ClassFunc
     {
