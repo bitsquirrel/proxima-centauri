@@ -6,6 +6,7 @@ using System.Windows;
 using System.Linq;
 using System.Xml;
 using System;
+using Functions_for_Dynamics_Operations.Objects;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -247,13 +248,13 @@ namespace Functions_for_Dynamics_Operations
 
                         if (!Constants.Constants.AlwaysNewLabel)
                         {
-                            if (LabelUtils.CheckTextAlreadyExists(LabelFileCollectionSelected, LabelFileSelected, text, out string labelidExisting))
-                            {   // Check if there is already a lebel with the text required
-                                if (labelidExisting != "" && !silent)
+                            if (LabelUtils.CheckTextAlreadyExists(LabelFileCollectionSelected, LabelFileSelected, text, out string labelIdExisting))
+                            {   // Check if there is already a label with the text required
+                                if (labelIdExisting != "" && !silent)
                                 {
-                                    if (!LabelUtils.CreateOrUseExistingLabel(LabelFileCollectionSelected, labelidExisting, text))
+                                    if (!LabelUtils.CreateOrUseExistingLabel(LabelFileCollectionSelected, labelIdExisting, text))
                                     {
-                                        return $"@{LabelFileCollectionSelected.Id}:{labelidExisting}";
+                                        return $"@{LabelFileCollectionSelected.Id}:{labelIdExisting}";
                                     }
                                 }
                             }
@@ -271,11 +272,10 @@ namespace Functions_for_Dynamics_Operations
                                 }
                                 else
                                 {
-                                    // Language text for the id exists but is different, inform the user rather than create a new label
-                                    VStudioUtils.LogToGenOutput($"Create label failed,the label Id already exists and the text for {id} is different - {label.Text} != {text}{Environment.NewLine}");
-                                    // labelTextToCreateLabel = $"TEXT DIFFERS || {text} || {label.Text}";
-                                    // Rather than send a different text, just return the original label id
-                                    return labelTextToCreateLabel;
+                                    // Label Id exists, however the text of the label itself is different to what has been provided so just log the issue
+                                    VStudioUtils.LogToGenOutput($"Create label failed, the label Id already exists and the text for {id} is different - {label.Text} != {text}{Environment.NewLine}");
+                                    // Rather than send a different text, just return the original label
+                                    return text;
                                 }
                             }
                             else

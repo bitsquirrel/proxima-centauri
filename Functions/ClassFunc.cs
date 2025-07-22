@@ -207,7 +207,7 @@ namespace Functions_for_Dynamics_Operations
             return CreateFormForm.Ok;
         }
 
-        internal void ApplyPattern(string patternName)
+        internal virtual void ApplyPattern(string patternName)
         {
                         
         }

@@ -10,11 +10,13 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
         {
             Prefix = prefix;
         }
+
         internal override string ClassName()
         {
             // Override this to return the class name
             return "Exception";
         }
+
         internal override void CreateClassMethods()
         {
             axClass.AddMethod(CreateConstructMethod());
@@ -31,7 +33,7 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
             return new AxMethod
             {
                 Name = "construct",
-                Visibility = CompilerVisibility.Internal,
+                Visibility = CompilerVisibility.Public,
                 Source = $@"    public static {Prefix}Exception construct()
     {{
         {Prefix}Exception excep = new {Prefix}Exception();
@@ -47,7 +49,7 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
             return new AxMethod
             {
                 Name = "retryTransientSqlConnectionError",
-                Visibility = CompilerVisibility.Internal,
+                Visibility = CompilerVisibility.Public,
                 Source = $@"    public boolean retryTransientSqlConnectionError(boolean _throwOnFail = true, int _maxRetries = defaultMaxRetries)
     {{
         if (retriesSqlTrans < _maxRetries)
@@ -76,7 +78,7 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
             return new AxMethod
             {
                 Name = "delayRetry",
-                Visibility = CompilerVisibility.Internal,
+                Visibility = CompilerVisibility.Public,
                 Source = $@"    public static void delayRetry(int _retryCount)
     {{
         var delay = 5000 * power(2, min(_retryCount, 5));
@@ -90,7 +92,7 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
             return new AxMethod
             {
                 Name = "retryDuplicateKeyException",
-                Visibility = CompilerVisibility.Internal,
+                Visibility = CompilerVisibility.Public,
                 Source = $@"    public boolean retryDuplicateKeyException(boolean _throwOnFail = true, int _maxRetries = defaultMaxRetries)
     {{
         if (retriesDupKey <= _maxRetries)
@@ -119,7 +121,7 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
             return new AxMethod
             {
                 Name = "retryUpdateConflictException",
-                Visibility = CompilerVisibility.Internal,
+                Visibility = CompilerVisibility.Public,
                 Source = $@"    public boolean retryUpdateConflictException(boolean _throwOnFail = true, int _maxRetries = defaultMaxRetries)
     {{
         if (appl.ttsLevel() == 0)
@@ -162,7 +164,7 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
             return new AxMethod
             {
                 Name = "retryDeadlockException",
-                Visibility = CompilerVisibility.Internal,
+                Visibility = CompilerVisibility.Public,
                 Source = $@"    public boolean retryDeadlockException(boolean _throwOnFail = true, int _maxRetries = defaultMaxRetries)
     {{
         if (retriesDead <= _maxRetries)
@@ -193,7 +195,7 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
                 Name = "exampleException",
                 Visibility = CompilerVisibility.Internal,
                 IsStatic = false,
-                Source = $@"internal void exampleException()
+                Source = $@"    internal void exampleException()
     {{
         Microsoft.Dynamics.Ax.Xpp.TransientSqlConnectionError transientSqlConnectionError;
         Microsoft.Dynamics.Ax.Xpp.UpdateConflictException updateConflictException;

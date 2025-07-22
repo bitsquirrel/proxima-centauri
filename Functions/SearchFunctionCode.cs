@@ -17,7 +17,7 @@ namespace Functions_for_Dynamics_Operations.Functions
         public DirectoryInfo DirectoryInfo;
         public string TextToSearch;
 
-        public SearchFunctionCode(DirectoryInfo directoryInfo, string textToSearch)
+        public SearchFunctionCode(DirectoryInfo directoryInfo, string textToSearch, bool ignoreComments)
         {
             DirectoryInfo = directoryInfo;
             TextToSearch = textToSearch;
@@ -53,10 +53,31 @@ namespace Functions_for_Dynamics_Operations.Functions
             {
                 if (file.Extension.Equals(".xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    string contents = File.ReadAllText(file.FullName);
+                    // string contents = File.ReadAllText(file.FullName);
+                    // Buff the contents to avoid multiple reads
+                    ParseCodeSearchFound parseCodeSearch = new ParseCodeSearchFound(File.ReadAllLines(file.FullName));
+                    // Only match actual code, not comments
+                    List<string> linesMatched = parseCodeSearch.CheckIfFoundIsNotAComment(TextToSearch);
+                    // If no lines matched, skip to the next file
+                    if (linesMatched.Count == 0)
+                        continue; // Skip this file if the search text is not found in any line
 
+                    foreach (string snippet in linesMatched)
+                    {
+                        codeObjects.Add(new CodeSearchFound()
+                        {
+                            ObjectName = file.Name.Replace(".xml", ""),
+                            ObjectType = subDirectory.Name,
+                            FullName = file.FullName,
+                            Snippet = snippet.Trim() 
+                        });
+                    }
+
+                    /*
                     int sourceCodeStartIndex = contents.IndexOf("<sourcecode>", StringComparison.OrdinalIgnoreCase);
                     int sourceCodeEndIndex = contents.IndexOf("</sourcecode>", StringComparison.OrdinalIgnoreCase);
+
+
 
                     if (sourceCodeStartIndex != -1 && sourceCodeEndIndex != -1)
                     {
@@ -67,12 +88,18 @@ namespace Functions_for_Dynamics_Operations.Functions
                         int searchTextIndex = sourceCodeContent.IndexOf(TextToSearch, StringComparison.OrdinalIgnoreCase);
                         if (searchTextIndex != -1)
                         {
+                            // Check if the line containing the search text is not a comment
+                            if (!parseCodeSearch.CheckIfFoundIsNotAComment(TextToSearch))
+                                continue; // Skip this file if the search text is in a comment
                             // Calculate the snippet start index to ensure it doesn't go below 0
                             int snippetStartIndex = Math.Max(0, searchTextIndex - 50);
                             // Calculate the snippet length to ensure it doesn't exceed the content's length
                             int snippetLength = Math.Min(TextToSearch.Length + 100, sourceCodeContent.Length - snippetStartIndex);
 
                             string snippet = sourceCodeContent.Substring(snippetStartIndex, snippetLength);
+
+                            if (snippet.Contains("//"))
+                                System.Threading.Thread.Sleep(0);
 
                             codeObjects.Add(new CodeSearchFound()
                             {
@@ -83,8 +110,30 @@ namespace Functions_for_Dynamics_Operations.Functions
                             });
                         }
                     }
+                    */
                 }
             }
+        }
+    }
+
+    internal class ParseCodeSearchFound
+    {
+        internal string[] Lines { get; set; }
+
+        public ParseCodeSearchFound(string[] lines)
+        {
+            Lines = lines;
+        }
+
+        internal List<string> CheckIfFoundIsNotAComment(string textToFindInLine) // We are only interested in the lines that contain the text to find, ignoring comments
+        {
+            // Check if the text to find is in any of the lines, ignoring case
+            return Lines.Where(line => line.ToLower().Contains(textToFindInLine.ToLower()))
+                // Then filter out comment lines as they are not relevant for the search
+                .Where(line => !line.TrimStart().Contains("//")
+                && !line.TrimStart().Contains("/*") 
+                && !line.TrimStart().Contains("*/")
+                && !line.Trim().StartsWith("*")).ToList();
         }
     }
 
@@ -105,10 +154,11 @@ namespace Functions_for_Dynamics_Operations.Functions
         {
             internal DirectoryInfo DirectoryInfo;
             public string TextToSearch;
+            public bool IgnoreComments;
 
             public List<CodeSearchFound> DoWork()
             {
-                return new SearchFunctionCode(DirectoryInfo, TextToSearch).RunLogic();
+                return new SearchFunctionCode(DirectoryInfo, TextToSearch, IgnoreComments).RunLogic();
             }
         }
 
@@ -188,10 +238,11 @@ namespace Functions_for_Dynamics_Operations.Functions
         {
             internal DirectoryInfo DirectoryInfo { get; set; }
             public string TextToSearch { get; set; }
+            public bool IgnoreComments { get; set; }
 
             public Task<List<CodeSearchFound>> DoWorkAsync()
             {
-                return Task.Run(() => new SearchFunctionCode(DirectoryInfo, TextToSearch).RunLogic());
+                return Task.Run(() => new SearchFunctionCode(DirectoryInfo, TextToSearch, IgnoreComments).RunLogic());
             }
         }
 

@@ -117,6 +117,10 @@ namespace Functions_for_Dynamics_Operations
                         case nameof(AxClass):
                             new PrivilegeFunc().CheckCreateActionMenuItemAndPrivileges(designMetaModel, vSProjectFileNode, EntryPointType.MenuItemAction, $"Menu item for class {vSProjectFileNode.Name}");
                             break;
+                        default:
+                            // For other types, we do not create menu items
+                            VStudioUtils.LogToGenOutput($"Menu item creation for {vSProjectFileNode.MetadataReference.MetadataType.Name}, is not supported");
+                            break;
                     }
                 }
             }
