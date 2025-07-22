@@ -1,6 +1,8 @@
-﻿using Microsoft.Dynamics.AX.Metadata.MetaModel.Extensions;
-using Microsoft.Dynamics.AX.Metadata.MetaModel;
+﻿using Microsoft.Dynamics.AX.Metadata.MetaModel;
+using Microsoft.Dynamics.AX.Metadata.MetaModel.Extensions;
 using Microsoft.Dynamics.Framework.Tools.MetaModel.Core;
+using System.Linq;
+using System.Reflection;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -13,19 +15,14 @@ namespace Functions_for_Dynamics_Operations
             if (IsNotLabelOrEmpty(axForm.Design.Caption, labelId))
             {
                 axForm.Design.Caption = labelEditor.AddLabelFromTextInCode($"{axForm.Name}~{axForm.Design.Caption}", "", true);
+            
             }
 
             foreach (AxFormControl control in axForm.GetAllControls())
             {
+                VStudioUtils.LogToGenOutput($"Generating labels for control {control.Name} on form {axForm.Name}");
+                // This function will call all child controls recursively.
                 GenLabelsForControl(labelEditor, control, axForm.Name, model);
-            }
-        }
-
-        public static void LoopChildControls(LabelEditorControl labelEditor, AxFormContainerControl control, string formName, string model)
-        {
-            foreach (var subControl in control.Controls)
-            {
-                GenLabelsForControl(labelEditor, subControl, formName, model);
             }
         }
 
@@ -39,8 +36,6 @@ namespace Functions_for_Dynamics_Operations
                 {
                     paneControl.Caption = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + paneControl.Name)}~{paneControl.Caption}", "", true);
                 }
-
-                LoopChildControls(labelEditor, paneControl, formName, model);
             }
             else if (control is AxFormActionPaneTabControl paneTabControl)
             {
@@ -48,8 +43,6 @@ namespace Functions_for_Dynamics_Operations
                 {
                     paneTabControl.Caption = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + paneTabControl.Name)}~{paneTabControl.Caption}", "", true);
                 }
-
-                LoopChildControls(labelEditor, paneTabControl, formName, model);
             }
             else if (control is AxFormButtonControl buttonControl)
             {
@@ -74,8 +67,6 @@ namespace Functions_for_Dynamics_Operations
                 {
                     buttonGroupControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + buttonGroupControl.Name)}Help~{buttonGroupControl.HelpText}", "", true);
                 }
-
-                LoopChildControls(labelEditor, buttonGroupControl, formName, model);
             }
             else if (control is AxFormCheckBoxControl checkBoxControl)
             {
@@ -131,8 +122,6 @@ namespace Functions_for_Dynamics_Operations
                 {
                     groupControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + groupControl.Name)}Help~{groupControl.HelpText}", "", true);
                 }
-
-                LoopChildControls(labelEditor, groupControl, formName, model);
             }
             else if (control is AxFormGuidControl guidControl)
             {
@@ -248,8 +237,6 @@ namespace Functions_for_Dynamics_Operations
                 {
                     referenceGroupControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + referenceGroupControl.Name)}Help~{referenceGroupControl.HelpText}", "", true);
                 }
-
-                LoopChildControls(labelEditor, referenceGroupControl, formName, model);
             }
             else if (control is AxFormSegmentedEntryControl segmentedEntryControl)
             {
@@ -281,6 +268,12 @@ namespace Functions_for_Dynamics_Operations
                 {
                     stringControl.Label = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + stringControl.Name)}~{stringControl.Label}", "", true);
                 }
+                /*
+                if (IsNotLabelOrEmpty(stringControl.Text, labelId))
+                {
+                    stringControl.Text = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + stringControl.Name)}Text~{stringControl.Text}", "", true);
+                }
+                */
 
                 if (IsNotLabelOrEmpty(stringControl.HelpText, labelId))
                 {
@@ -293,8 +286,6 @@ namespace Functions_for_Dynamics_Operations
                 {
                     tabControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + tabControl.Name)}Help~{tabControl.HelpText}", "", true);
                 }
-
-                LoopChildControls(labelEditor, tabControl, formName, model);
             }
             else if (control is AxFormTabPageControl tabPageControl)
             {
@@ -307,8 +298,6 @@ namespace Functions_for_Dynamics_Operations
                 {
                     tabPageControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + tabPageControl.Name)}Help~{tabPageControl.HelpText}", "", true);
                 }
-
-                LoopChildControls(labelEditor, tabPageControl, formName, model);
             }
             else if (control is AxFormTableControl tableControl)
             {
@@ -342,7 +331,7 @@ namespace Functions_for_Dynamics_Operations
                 GenLabelsForControl(labelEditor, control.FormControl, axForm.Name, model);
             }
 
-            foreach (Microsoft.Dynamics.AX.Metadata.MetaModel.AxPropertyModification propertyMod in axForm.PropertyModifications)
+            foreach (AxPropertyModification propertyMod in axForm.PropertyModifications)
             {
                 switch (propertyMod.Name)
                 {
@@ -362,9 +351,9 @@ namespace Functions_for_Dynamics_Operations
                 }
             }
 
-            foreach (Microsoft.Dynamics.AX.Metadata.MetaModel.AxExtensionModification axExtensionModification in axForm.ControlModifications)
+            foreach (AxExtensionModification axExtensionModification in axForm.ControlModifications)
             {
-                foreach (Microsoft.Dynamics.AX.Metadata.MetaModel.AxPropertyModification propertyMod in axExtensionModification.PropertyModifications)
+                foreach (AxPropertyModification propertyMod in axExtensionModification.PropertyModifications)
                 {
                     switch (propertyMod.Name)
                     {

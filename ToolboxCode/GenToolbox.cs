@@ -27,6 +27,7 @@ namespace Functions_for_Dynamics_Operations.ToolboxCode
             new UtilsCode(prefixForm.Prefix).CreateClass();
             new SysOpBaseCode(prefixForm.Prefix).CreateClass();
             new ExceptionCode(prefixForm.Prefix).CreateClass();
+            new DimensionCode(prefixForm.Prefix).CreateClass();
             new SysOpContractCode(VSProjectNode, prefixForm.Prefix).CreateClass();
         }
 

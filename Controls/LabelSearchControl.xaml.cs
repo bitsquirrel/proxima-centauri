@@ -10,6 +10,7 @@ using System.Web.UI.WebControls.Expressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using static Functions_for_Dynamics_Operations.LabelSearchUtils;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -101,11 +102,22 @@ namespace Functions_for_Dynamics_Operations
                     System.Windows.Forms.ToolStripMenuItem copy = new System.Windows.Forms.ToolStripMenuItem("Copy");
                     copy.Click += Copy_Click;
 
-                    System.Windows.Forms.ToolStripMenuItem findFeferences = new System.Windows.Forms.ToolStripMenuItem("Find references");
-                    findFeferences.Click += FindReferences_Click; ;
+                    System.Windows.Forms.ToolStripMenuItem copyText = new System.Windows.Forms.ToolStripMenuItem("Copy text");
+                    copyText.Click += (s, args) =>
+                    {
+                        if (RowRightClick != -1 && SearchDataGrid.Rows[RowRightClick] != null)
+                        {
+                            System.Windows.Forms.DataGridViewRow row = SearchDataGrid.Rows[RowRightClick];
+                            System.Windows.Forms.Clipboard.SetText(row.Cells[2].Value.ToString());
+                        }
+                    };
+
+                    System.Windows.Forms.ToolStripMenuItem findReferences = new System.Windows.Forms.ToolStripMenuItem("Find references");
+                    findReferences.Click += FindReferences_Click; ;
 
                     mnu.Items.Add(copy);
-                    mnu.Items.Add(findFeferences);
+                    mnu.Items.Add(copyText);
+                    mnu.Items.Add(findReferences);
 
                     mnu.Show(new System.Drawing.Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y));
                 }
@@ -156,7 +168,7 @@ namespace Functions_for_Dynamics_Operations
                 // Reset when search 
                 SearchDataGrid.DataSource = null;
                 // This is an async task to search labels and resetting the Do Not Launch cannot be done here
-                Task t = new LabelSearchController(SearchDataGrid, LanguageCombo.SelectedItem.ToString(), SearchText.Text, SearchType.SelectedItem.ToString()).FindLabels();
+                Task t = new LabelSearcherController(SearchDataGrid, LanguageCombo.SelectedItem.ToString(), SearchText.Text, SearchType.SelectedItem.ToString()).FindLabelsAsync();
             }
             catch (ExceptionVsix ex)
             {

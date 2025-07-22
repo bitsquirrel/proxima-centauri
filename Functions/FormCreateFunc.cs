@@ -90,7 +90,7 @@ namespace Functions_for_Dynamics_Operations
             buildHelper.CompileElements(designMetaModelService.CurrentMetadataProvider, System.Threading.CancellationToken.None, modelElementCompilationDescriptors, CompileMode.Incremental, projectNode.GetProjectsModelInfo(), true);
         }
 
-        internal new void ApplyPattern(string patternName)
+        internal override void ApplyPattern(string patternName)
         {
             var pattern = PatternFactory.AllPatterns.FirstOrDefault(i => i.FriendlyName.ToLower() == patternName.ToLower());
 

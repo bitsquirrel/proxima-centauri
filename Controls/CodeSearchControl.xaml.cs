@@ -79,10 +79,9 @@ namespace Functions_for_Dynamics_Operations
 
                     string objectType = GridUtils.GetGridRowValue(SearchDataGrid, e.RowIndex, 0);
                     string objectName = GridUtils.GetGridRowValue(SearchDataGrid, e.RowIndex, 1);
-
-                    // string filePath = GridUtils.GetGridRowValue(SearchDataGrid, e.RowIndex, 3);
-
-                    new CodeViewUtils(metaModelService, SearchText.Text, objectName, objectType).OpenSource();
+                    string textLine = GridUtils.GetGridRowValue(SearchDataGrid, e.RowIndex, 2);
+                    // Using the line of text in the grid gives a better context and reduces the chance of opening the wrong object
+                    new CodeViewUtils(metaModelService, textLine, objectName, objectType).OpenSource();
                 }
                 catch (ExceptionVsix ex)
                 {

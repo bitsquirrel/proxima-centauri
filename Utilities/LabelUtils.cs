@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Microsoft.Dynamics.AX.Metadata.MetaModel;
+using Microsoft.Dynamics.Framework.Tools.MetaModel.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Functions_for_Dynamics_Operations
 {
-    public class LabelUtils
+    internal class LabelUtils
     {
         public static bool LoadLabelFile(DLabelFileCollection fileCollection, DLabelFile labelFile)
         {
@@ -138,24 +141,24 @@ namespace Functions_for_Dynamics_Operations
             return null;
         }
 
-        internal static bool CheckTextAlreadyExists(DLabelFileCollection LabelFileColl, DLabelFile selected, string text, out string labelidExisting)
+        internal static bool CheckTextAlreadyExists(DLabelFileCollection LabelFileColl, DLabelFile selected, string text, out string labelIdExisting)
         {
             if (text != "")
             {
-                foreach (var labelid in LabelFileColl.Labels)
+                foreach (var labelId in LabelFileColl.Labels)
                 {
-                    if (labelid.Value.TryGetValue(selected.Language, out Label label))
+                    if (labelId.Value.TryGetValue(selected.Language, out Label label))
                     {
                         if (label.Text.ToLower() == text.ToLower())
                         {
-                            labelidExisting = labelid.Key;
+                            labelIdExisting = labelId.Key;
                             return true;
                         }
                     }
                 }
             }
 
-            labelidExisting = "";
+            labelIdExisting = "";
             return false;
         }
 

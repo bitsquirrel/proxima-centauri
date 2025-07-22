@@ -57,7 +57,7 @@ namespace Functions_for_Dynamics_Operations.Functions
                 axMenuItem.Object = "SysOperationServiceController";
                 axMenuItem.EnumTypeParameter = "SysOperationExecutionMode";
             }
-            else if (_class.Extends != null && _class.Extends != "" && (_class.Extends.ToLower() == "sysoperationservicebase" || _class.Extends.ToLower() == "runbasebatch"))
+            else
             {
                 axMenuItem.Object = _class.Name;
             }
