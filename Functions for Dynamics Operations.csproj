@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>\\dev.pylades.local\dfs\Backup\Super Awesome\Functions for Dynamics %28 Dynamics365F&amp;O %29\44\Functions for Dynamics 2022\</OutputPath>
+    <OutputPath>\\dev.pylades.local\dfs\Backup\Super Awesome\Functions for Dynamics %28 Dynamics365F&amp;O %29\45\Functions for Dynamics 2022\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -173,124 +173,95 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Dynamics.AX.Data, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Data.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Data">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Data.Management, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Data.Management.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Data.Management">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Data.Management.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Data.Management.Sync, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Data.Management.Sync.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Data.Management.Sync">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Data.Management.Sync.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeExtensions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeExtensions.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeExtensions">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFixerExtensions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFixerExtensions.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFixerExtensions">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFixerExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFixerIntegration.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFixerIntegration.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFixerIntegration.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFixerIntegration.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFramework, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFramework.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFramework">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFramework.UIRules, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFramework.UIRules.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFramework.UIRules">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFramework.UIRules.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPractices.Common, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Framework.BestPractices.Common.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPractices.Common">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Framework.BestPractices.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.Diagnostics, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Framework.Diagnostics.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Framework.Diagnostics">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Framework.Diagnostics.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.Xlnt.XppCore, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Framework.Xlnt.XppCore.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Framework.Xlnt.XppCore">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Framework.Xlnt.XppCore.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Metadata, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Metadata.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Metadata">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Metadata.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Metadata.Core, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Metadata.Core.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Metadata.Core">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Metadata.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Dynamics.AX.Metadata.Extensions">
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Metadata.Extensions.dll</HintPath>
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Metadata.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Metadata.Patterns, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.AX.Metadata.Patterns.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.AX.Metadata.Patterns">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.AX.Metadata.Patterns.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.BusinessPlatform.SharedTypes, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.BusinessPlatform.SharedTypes.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.BusinessPlatform.SharedTypes">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.BusinessPlatform.SharedTypes.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.ApplicationExplorer.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.ApplicationExplorer.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.ApplicationExplorer.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.ApplicationExplorer.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.AutomationObjects.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.AutomationObjects.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.AutomationObjects.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.AutomationObjects.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.BuildTasks.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.BuildTasks.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.BuildTasks.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.BuildTasks.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.Configuration.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.Configuration.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.Configuration.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.Configuration.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.Core.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.Core.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.Core.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.Core.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.Designers.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.Designers.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.Designers.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.Designers.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.Extensibility.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.Extensibility.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.Extensibility.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.Extensibility.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.FormControlExtension.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.FormControlExtension.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.FormControlExtension.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.FormControlExtension.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.LabelEditor.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.LabelEditor.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.LabelEditor.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.LabelEditor.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.Labels.Resolvers, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.Labels.Resolvers.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.Labels.Resolvers">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.Labels.Resolvers.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.MetaModel.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.MetaModel.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.MetaModel.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.MetaModel.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.MetaModel.Core.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.MetaModel.Core.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.MetaModel.Core.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.MetaModel.Core.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.ProjectSupport.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.ProjectSupport.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.ProjectSupport.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.ProjectSupport.17.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.Framework.Tools.ProjectSystem.17.0, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\44\Dlls\Microsoft.Dynamics.Framework.Tools.ProjectSystem.17.0.dll</HintPath>
+    <Reference Include="Microsoft.Dynamics.Framework.Tools.ProjectSystem.17.0">
+      <HintPath>\\dev-file01\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\45\Dlls\Microsoft.Dynamics.Framework.Tools.ProjectSystem.17.0.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

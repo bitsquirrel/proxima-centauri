@@ -99,7 +99,7 @@ namespace Functions_for_Dynamics_Operations
 
             IDesignMetaModelService designMetaModelService = projectNode.DesignMetaModelService;
 
-            BuildHelper buildHelper = new BuildHelper(designMetaModelService.CurrentMetaModelService, designMetaModelService.CurrentMetadataProvider);
+            BuildHelper buildHelper = new BuildHelper(designMetaModelService.CurrentMetadataProvider);
 
             buildHelper.CompileElements(designMetaModelService.CurrentMetadataProvider, System.Threading.CancellationToken.None, modelElementCompilationDescriptors, compileMode, projectNode.GetProjectsModelInfo(), true);
         }
@@ -108,9 +108,9 @@ namespace Functions_for_Dynamics_Operations
         /// Find all references for the label file
         /// </summary>
         /// <param name="labelid"></param>
-        internal static void FindReferences(string labelid)
+        internal static void FindReferences(string labelId)
         {
-            Microsoft.Dynamics.Framework.Tools.MetaModel.MetaModelUtility.FindReferencesOnLabelId(labelid);
+            Microsoft.Dynamics.Framework.Tools.MetaModel.MetaModelUtility.FindReferencesOnLabelId(labelId);
         }
 
         /// <summary>
@@ -122,30 +122,30 @@ namespace Functions_for_Dynamics_Operations
         }
 
         /// <summary>
-        /// Obtian the DynEdtVariable object from the string provided
+        /// Obtain the DynEdtVariable object from the string provided
         /// </summary>
         /// <param name="selection">string selected to be marshalled to object</param>
         /// <returns>instantiated object from the string provided</returns>
         public static DynEdtVariable GetEdtVariable(string selection)
         {
-            DynEdtVariable edtvariable = new DynEdtVariable();
+            DynEdtVariable edtVariable = new DynEdtVariable();
 
             selection = selection.Replace(";", "");
 
             foreach (var text in selection.Split(' '))
             {
-                if (edtvariable.Edt == null)
+                if (edtVariable.Edt == null)
                 {
-                    edtvariable.Edt = text;
+                    edtVariable.Edt = text;
                 }
 
-                if (edtvariable.Variable == null && edtvariable.Edt != null)
+                if (edtVariable.Variable == null && edtVariable.Edt != null)
                 {
-                    edtvariable.Variable = text;
+                    edtVariable.Variable = text;
                 }
             }
 
-            return edtvariable;
+            return edtVariable;
         }
 
         /// <summary>
