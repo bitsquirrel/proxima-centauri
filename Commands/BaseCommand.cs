@@ -51,9 +51,17 @@ namespace Functions_for_Dynamics_Operations
             {
                 ExecuteCommand(sender, e);
             }
-            catch (ExceptionVsix ex)
+            catch (Exception ex)
             {
-                ex.Log(GetErrorMessage());
+                // Try to log using ExceptionVsix if available, otherwise create one
+                if (ex is ExceptionVsix exVsix)
+                {
+                    exVsix.Log(GetErrorMessage());
+                }
+                else
+                {
+                    new ExceptionVsix(ex).Log(GetErrorMessage());
+                }
             }
         }
 
