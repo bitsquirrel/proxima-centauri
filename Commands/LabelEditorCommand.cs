@@ -54,7 +54,7 @@ namespace Functions_for_Dynamics_Operations
         /// <param name="e">Event args.</param>
         protected override void ExecuteCommand(object sender, EventArgs e)
         {
-            StartRunLabelEditorFunc startRunLabel = new StartRunLabelEditorFunc(this.package);
+            StartRunLabelEditorFunc startRunLabel = new StartRunLabelEditorFunc(package);
             // When called from here, it will create a new instance of the editor
             if (startRunLabel.StartRunLabelEditor(true))
             {

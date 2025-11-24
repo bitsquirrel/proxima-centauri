@@ -54,7 +54,7 @@ namespace Functions_for_Dynamics_Operations
         /// <param name="e">Event args.</param>
         protected override void ExecuteCommand(object sender, EventArgs e)
         {
-            StartRunCodeSearchFunc startRunCodeSearch = new StartRunCodeSearchFunc(this.package);
+            StartRunCodeSearchFunc startRunCodeSearch = new StartRunCodeSearchFunc(package);
 
             if (startRunCodeSearch.StartRunCodeSearch())
             {

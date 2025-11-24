@@ -56,7 +56,7 @@ namespace Functions_for_Dynamics_Operations
         /// <param name="e">Event args.</param>
         protected override void ExecuteCommand(object sender, EventArgs e)
         {
-            StartRunBPEditorFunc startRun = new StartRunBPEditorFunc(this.package);
+            StartRunBPEditorFunc startRun = new StartRunBPEditorFunc(package);
             // When called from here, it will create a new instance of the editor
             if (startRun.StartRunBPEditor(true))
             {
