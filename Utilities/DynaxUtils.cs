@@ -99,7 +99,7 @@ namespace Functions_for_Dynamics_Operations
 
             IDesignMetaModelService designMetaModelService = projectNode.DesignMetaModelService;
 
-            BuildHelper buildHelper = new BuildHelper(designMetaModelService.CurrentMetaModelService, designMetaModelService.CurrentMetadataProvider);
+            BuildHelper buildHelper = new BuildHelper(designMetaModelService.CurrentMetadataProvider);
 
             buildHelper.CompileElements(designMetaModelService.CurrentMetadataProvider, System.Threading.CancellationToken.None, modelElementCompilationDescriptors, compileMode, projectNode.GetProjectsModelInfo(), true);
         }
