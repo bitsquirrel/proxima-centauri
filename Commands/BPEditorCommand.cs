@@ -4,8 +4,6 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.ComponentModel.Design;
-using System.Globalization;
-using System.Threading;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
@@ -14,7 +12,7 @@ namespace Functions_for_Dynamics_Operations
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class BPEditorCommand
+    internal sealed class BPEditorCommand : BaseCommand
     {
         /// <summary>
         /// Command ID.
@@ -27,44 +25,18 @@ namespace Functions_for_Dynamics_Operations
         public static readonly Guid CommandSet = new Guid("0d83bcff-55f6-4b2c-9583-5b3df6a1104d");
 
         /// <summary>
-        /// VS Package that provides this command, not null.
+        /// Gets the instance of the command.
         /// </summary>
-        private readonly AsyncPackage package;
+        public static BPEditorCommand Instance { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BPEditorCommand"/> class.
-        /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
         private BPEditorCommand(AsyncPackage package, OleMenuCommandService commandService)
+            : base(package, commandService, CommandSet, CommandId)
         {
-            this.package = package ?? throw new ArgumentNullException(nameof(package));
-            commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
-
-            var menuCommandID = new CommandID(CommandSet, CommandId);
-            var menuItem = new MenuCommand(this.Execute, menuCommandID);
-            commandService.AddCommand(menuItem);
-        }
-
-        /// <summary>
-        /// Gets the instance of the command.
-        /// </summary>
-        public static BPEditorCommand Instance
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the service provider from the owner package.
-        /// </summary>
-        private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider
-        {
-            get
-            {
-                return this.package;
-            }
         }
 
         /// <summary>
@@ -73,37 +45,33 @@ namespace Functions_for_Dynamics_Operations
         /// <param name="package">Owner package, not null.</param>
         public static async Task InitializeAsync(AsyncPackage package)
         {
-            // Switch to the main thread - the call to AddCommand in BPEditorCommand's constructor requires
-            // the UI thread.
-            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
-
-            OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
-            Instance = new BPEditorCommand(package, commandService);
+            Instance = await InitializeCommandAsync(package, CommandSet, CommandId,
+                (pkg, cmdService) => new BPEditorCommand(pkg, cmdService));
         }
 
         /// <summary>
-        /// Shows the tool window when the menu item is clicked.
+        /// Executes the command logic - shows the tool window when the menu item is clicked.
         /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event args.</param>
-        private void Execute(object sender, EventArgs e)
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event args.</param>
+        protected override void ExecuteCommand(object sender, EventArgs e)
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
+            StartRunBPEditorFunc startRun = new StartRunBPEditorFunc(package);
+            // When called from here, it will create a new instance of the editor
+            if (startRun.StartRunBPEditor(true))
+            {
+                IVsWindowFrame windowFrame = (IVsWindowFrame)startRun.Window.Frame;
+                ErrorHandler.ThrowOnFailure(windowFrame.Show());
+            }
+        }
 
-            try
-            {
-                StartRunBPEditorFunc startRun = new StartRunBPEditorFunc(package);
-                // When called from here, it will create a new instance of the editor
-                if (startRun.StartRunBPEditor(true))
-                {
-                    IVsWindowFrame windowFrame = (IVsWindowFrame)startRun.Window.Frame;
-                    ErrorHandler.ThrowOnFailure(windowFrame.Show());
-                }
-            }
-            catch (ExceptionVsix ex)
-            {
-                ex.Log("Unable to open Best Practice Editor");
-            }
+        /// <summary>
+        /// Gets the error message to log when command execution fails.
+        /// </summary>
+        /// <returns>Error message string.</returns>
+        protected override string GetErrorMessage()
+        {
+            return "Unable to open Best Practice Editor";
         }
     }
 }
