@@ -20,30 +20,12 @@ namespace Functions_for_Dynamics_Operations
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelEditor"/> class.
+        /// The caption and model are set later by <see cref="StartRunLabelEditorFunc"/>.
         /// </summary>
         public LabelEditor() : base(null)
         {
-            Microsoft.Dynamics.AX.Metadata.MetaModel.ModelInfo modelInfo = VStudioUtils.GetActiveAXProjectModelInfo();
-            if (modelInfo != null)
-            {
-                string modelName = modelInfo.Module;
-
-                if (modelName != null && modelName != "")
-                {   // Label editor per model in the solution
-                    Caption = "365 Label Editor - " + modelInfo.DisplayName;
-                    Content = new LabelEditorControl(modelName);
-                }
-                else
-                {
-                    Caption = "NO PROJECT";
-                    Content = new LabelEditorControl("");
-                }
-            }
-            else
-            {
-                Caption = "NO PROJECT";
-                Content = new LabelEditorControl("");
-            }
+            Caption = "365 Label Editor";
+            Content = new LabelEditorControl(string.Empty);
         }
     }
 }

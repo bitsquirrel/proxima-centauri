@@ -1,10 +1,6 @@
-﻿using EnvDTE;
-using EnvDTE80;
-using Microsoft.VisualStudio.PlatformUI;
-using Microsoft.VisualStudio.Shell;
+﻿using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using System.IO.Packaging;
-using System.Windows.Controls;
+using Functions_for_Dynamics_Operations.Utilities;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -38,8 +34,12 @@ namespace Functions_for_Dynamics_Operations
                 {
                     create = true;
                 }
+
+                CodeViewUtils.DoNotLaunchOtherTools = true;
                 // Create an instance per model being used
                 Window = AsyncPackage.FindToolWindow(typeof(LabelEditor), lfp.Id, create);
+                CodeViewUtils.DoNotLaunchOtherTools = false;
+
                 if ((null != Window) && (null != Window.Frame))
                 {
                     Window.Caption = "365 Label Editor - " + lfp.Model;
@@ -61,15 +61,6 @@ namespace Functions_for_Dynamics_Operations
             }
 
             return false;
-        }
-
-        public void StopEmptyLabelEditor()
-        {
-            DTE2 dte = AsyncPackage.GetGlobalService(typeof(SDTE)) as DTE2;
-
-            ToolWindows toolWindows = dte.ToolWindows;
-            LabelEditor userControl = (LabelEditor)toolWindows.GetToolWindow("LabelEditor");
-
         }
 
         public void StopLabelEditor()

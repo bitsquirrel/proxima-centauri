@@ -1,6 +1,7 @@
 ﻿using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Functions_for_Dynamics_Operations.Utilities;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -13,8 +14,11 @@ namespace Functions_for_Dynamics_Operations
 
         internal bool StartRunCodeSearch()
         {
+            CodeViewUtils.DoNotLaunchOtherTools = true;
             // Create an instance per model being used
             Window = AsyncPackage.FindToolWindow(typeof(CodeSearch), 0, true);
+            CodeViewUtils.DoNotLaunchOtherTools = false;
+
             if ((null != Window) && (null != Window.Frame))
             {
                 return true;

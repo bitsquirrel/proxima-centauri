@@ -181,13 +181,41 @@ namespace Functions_for_Dynamics_Operations
         private void OnCloseToolWindow()
         {
             // We need to close the tool windows when the project is closed, otherwise the events are triggered randomly opening the tool windows
-            new StartRunLabelSearchFunc(this).StopLabelSearch();
+            try
+            {
+                new StartRunLabelSearchFunc(this).StopLabelSearch();
+            }
+            catch (Exception ex)
+            {
+                VStudioUtils.LogToGenOutput($"Error closing Label Search - {ex}");
+            }
 
-            new StartRunLabelEditorFunc(this).StopLabelEditor();
+            try
+            {
+                new StartRunLabelEditorFunc(this).StopLabelEditor();
+            }
+            catch (Exception ex)
+            {
+                VStudioUtils.LogToGenOutput($"Error closing Label Editor - {ex}");
+            }
 
-            new StartRunCodeSearchFunc(this).StopCodeSearch();
+            try
+            {
+                new StartRunCodeSearchFunc(this).StopCodeSearch();
+            }
+            catch (Exception ex)
+            {
+                VStudioUtils.LogToGenOutput($"Error closing Code Search - {ex}");
+            }
 
-            new StartRunBPEditorFunc(this).StopBPEditor();
+            try
+            {
+                new StartRunBPEditorFunc(this).StopBPEditor();
+            }
+            catch (Exception ex)
+            {
+                VStudioUtils.LogToGenOutput($"Error closing BP Editor - {ex}");
+            }
         }
     }
 }

@@ -20,30 +20,12 @@ namespace Functions_for_Dynamics_Operations
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BPEditor"/> class.
+        /// The caption is set later by <see cref="StartRunBPEditorFunc"/>.
         /// </summary>
         public BPEditor() : base(null)
         {
-            Microsoft.Dynamics.AX.Metadata.MetaModel.ModelInfo modelInfo = VStudioUtils.GetActiveAXProjectModelInfo();
-            if (modelInfo != null)
-            {
-                string modelName = modelInfo.Module;
-
-                if (modelName != null && modelName != "")
-                {   // Label editor per model in the solution
-                    Caption = "365 BP Editor - " + modelInfo.DisplayName;
-                    Content = new BPEditorControl();
-                }
-                else
-                {
-                    Caption = "NO PROJECT";
-                    Content = new BPEditorControl();
-                }
-            }
-            else
-            {
-                Caption = "NO PROJECT";
-                Content = new BPEditorControl();
-            }
+            Caption = "365 BP Editor";
+            Content = new BPEditorControl();
         }
     }
 }

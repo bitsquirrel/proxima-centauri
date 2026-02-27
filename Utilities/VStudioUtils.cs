@@ -642,7 +642,7 @@ namespace Functions_for_Dynamics_Operations
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show($"Exception on GetModelsFolder function - {ex}");
+                LogToGenOutput($"Exception on GetModelsFolder function - {ex}");
             }
 
             return "";

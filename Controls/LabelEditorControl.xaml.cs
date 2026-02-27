@@ -306,7 +306,7 @@ namespace Functions_for_Dynamics_Operations
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.ToString());
+                VStudioUtils.LogToGenOutput($"Error creating label - {ex}");
             }
 
             return labelTextToCreateLabel;
@@ -800,18 +800,24 @@ namespace Functions_for_Dynamics_Operations
             string id = GridUtils.GetGridRowValue(SecondaryLabelGridView, e.RowIndex, 1);
             string text = GridUtils.GetGridRowValue(SecondaryLabelGridView, e.RowIndex, 2);
             string description = GridUtils.GetGridRowValue(SecondaryLabelGridView, e.RowIndex, 3);
-            string descriptionExisted = GridUtils.GetGridRowValue(SecondaryLabelGridView, e.RowIndex, 5);
 
             if (language != "")
             {
-                Label label = LabelFileCollectionSelected.Labels[id].First(k => k.Key == language).Value;
-
-                if (label.Text != text || label.Description != description)
+                try
                 {
-                    label.Text = text;
-                    label.Description = description;
-                    // Edited label means update to cache and the physical file
-                    LabelCRUD.DumpLabelFileSingleToBuff(LabelFileCollectionSelected, LabelFileCollectionSelected.Files.First(l => l.Language == language));
+                    Label label = LabelFileCollectionSelected.Labels[id].First(k => k.Key == language).Value;
+
+                    if (label.Text != text || label.Description != description)
+                    {
+                        label.Text = text;
+                        label.Description = description;
+                        // Edited label means update to cache and the physical file
+                        LabelCRUD.DumpLabelFileSingleToBuff(LabelFileCollectionSelected, LabelFileCollectionSelected.Files.First(l => l.Language == language));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    VStudioUtils.LogToGenOutput($"Error updating secondary label - {ex}");
                 }
             }
         }
@@ -1261,34 +1267,44 @@ namespace Functions_for_Dynamics_Operations
 
         private void SyncEmpty_Click(object sender, RoutedEventArgs e)
         {
-            foreach (DLabelFile dLabel in LabelFileCollectionSelected.Files)
+            try
             {
-                // Get the next language to deal with
-                if (dLabel.Language != LabelFileSelected.Language)
+                foreach (DLabelFile dLabel in LabelFileCollectionSelected.Files)
                 {
-                    // Grab the label for the label file being checked
-                    foreach (var lab in LabelFileCollectionSelected.Labels)
+                    // Get the next language to deal with
+                    if (dLabel.Language != LabelFileSelected.Language)
                     {
-                        // Pick up the default label
-                        var labelLangDefault = lab.Value.FirstOrDefault(a => a.Key == LabelFileSelected.Language);
-                        // No parse every empty text label to update
-                        foreach (var label in lab.Value.Where(a => a.Key != LabelFileSelected.Language && a.Value.Text == ""))
+                        // Grab the label for the label file being checked
+                        foreach (var lab in LabelFileCollectionSelected.Labels)
                         {
-                            label.Value.Text = Translate.TranslateAzure(labelLangDefault.Value.Text, LabelFileSelected.Language, dLabel.Language);
+                            // Pick up the default label
+                            var labelLangDefault = lab.Value.FirstOrDefault(a => a.Key == LabelFileSelected.Language);
+                            // No parse every empty text label to update
+                            foreach (var label in lab.Value.Where(a => a.Key != LabelFileSelected.Language && a.Value.Text == ""))
+                            {
+                                label.Value.Text = Translate.TranslateAzure(labelLangDefault.Value.Text, LabelFileSelected.Language, dLabel.Language);
 
-                            label.Value.Description = labelLangDefault.Value.Description;
+                                label.Value.Description = labelLangDefault.Value.Description;
+                            }
                         }
                     }
-                }
 
-                LabelCRUD.DumpLabelFileSingleToBuff(LabelFileCollectionSelected, dLabel);
+                    LabelCRUD.DumpLabelFileSingleToBuff(LabelFileCollectionSelected, dLabel);
+                }
+                // Reload all
+                LoadPrimaryLabels();
             }
-            // Reload all
-            LoadPrimaryLabels();
+            catch (Exception ex)
+            {
+                VStudioUtils.LogToGenOutput($"Error syncing empty labels - {ex}");
+            }
         }
 
         private void ExcludeComB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (ExcludeComB.SelectedItem == null)
+                return;
+
             string noTransLang = ExcludeComB.SelectedItem.ToString();
 
             if (LabelFileSelected != null && noTransLang != LabelFileSelected.Language)
@@ -1324,6 +1340,9 @@ namespace Functions_for_Dynamics_Operations
 
             if (LabelFileCollections != null)
                 LabelFileCollections = null;
+
+            if (LabelFileCollectionSelected != null)
+                LabelFileCollectionSelected = null;
 
             if (LabelFileSelected != null)
                 LabelFileSelected = null;

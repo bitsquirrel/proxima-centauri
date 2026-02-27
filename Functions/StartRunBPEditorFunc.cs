@@ -1,19 +1,15 @@
 ﻿using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Functions_for_Dynamics_Operations.Utilities;
 
 namespace Functions_for_Dynamics_Operations
 {
-    internal class StartRunBPEditorFunc
+    internal class StartRunBPEditorFunc : ToolWindowsFunc
     {
-        private readonly AsyncPackage AsyncPackage;
         public BPEditorControl BpEditor;
-        public ToolWindowPane Window;
 
-        public StartRunBPEditorFunc(AsyncPackage package)
-        {
-            AsyncPackage = package;
-        }
+        public StartRunBPEditorFunc(AsyncPackage package) : base(package) { }
 
         public bool StartRunBPEditor(bool create)
         {
@@ -26,8 +22,11 @@ namespace Functions_for_Dynamics_Operations
                     create = true;
                 }
 
+                CodeViewUtils.DoNotLaunchOtherTools = true;
                 // Create an instance per model being used
                 Window = AsyncPackage.FindToolWindow(typeof(BPEditor), modelInfo.Id, create);
+                CodeViewUtils.DoNotLaunchOtherTools = false;
+
                 if ((null != Window) && (null != Window.Frame))
                 {
                     Window.Caption = "365 BP Editor - " + modelInfo.Name;
