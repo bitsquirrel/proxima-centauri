@@ -28,7 +28,15 @@ namespace Functions_for_Dynamics_Operations
         {
             Caption = "365 Label Search";
 
-            Content = new LabelSearchControl(new LabelSearchUtils().SearchForLabels());
+            try
+            {
+                Content = new LabelSearchControl(new LabelSearchUtils().SearchForLabels());
+            }
+            catch (Exception ex)
+            {
+                VStudioUtils.LogToGenOutput($"Error initializing Label Search - {ex}");
+                Content = new LabelSearchControl(new List<string>());
+            }
         }
     }
 }

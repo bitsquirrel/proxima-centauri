@@ -293,6 +293,22 @@ namespace Functions_for_Dynamics_Operations.Functions
                             designMetaModel.CurrentMetadataProvider.MenuExtensions.Update(axMenuExtension, new ModelSaveInfo(modelInfo));
                             break;
 
+                        case nameof(AxSecurityDutyExtension):
+                            AxSecurityDutyExtension axSecurityDutyExtension = designMetaModel.CurrentMetadataProvider.SecurityDutyExtensions.Read(vSProjectFileNode.Name);
+
+                            SecurityFunc.GenLabelsForDutyExt(StartRunLabel.LabelEditor, axSecurityDutyExtension);
+
+                            designMetaModel.CurrentMetadataProvider.SecurityDutyExtensions.Update(axSecurityDutyExtension, new ModelSaveInfo(modelInfo));
+                            break;
+
+                        case nameof(AxSecurityRoleExtension):
+                            AxSecurityRoleExtension axSecurityRoleExtension = designMetaModel.CurrentMetadataProvider.SecurityRoleExtensions.Read(vSProjectFileNode.Name);
+
+                            SecurityFunc.GenLabelsForRoleExt(StartRunLabel.LabelEditor, axSecurityRoleExtension);
+
+                            designMetaModel.CurrentMetadataProvider.SecurityRoleExtensions.Update(axSecurityRoleExtension, new ModelSaveInfo(modelInfo));
+                            break;
+
                             #endregion
                     }
                 }
