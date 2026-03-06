@@ -71,6 +71,30 @@ namespace Functions_for_Dynamics_Operations
         {
             return (obj == null || obj.ToString() == "");
         }
+
+        public static string ToCamelCase(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return value;
+
+            int upperCount = 0;
+            while (upperCount < value.Length && char.IsUpper(value[upperCount]))
+            {
+                upperCount++;
+            }
+
+            if (upperCount == 0)
+                return value;
+
+            if (upperCount == 1)
+                return char.ToLower(value[0]) + value.Substring(1);
+
+            if (upperCount == value.Length)
+                return value.ToLower();
+
+            // Lowercase all leading uppercase except the last, which starts the next word
+            return value.Substring(0, upperCount - 1).ToLower() + value.Substring(upperCount - 1);
+        }
     }
 
     public class VStudioUtils

@@ -442,7 +442,7 @@ namespace Functions_for_Dynamics_Operations
                                  "    /// <param name = '_", name, "'></param>", Environment.NewLine,
                                  "    /// <returns>Returns ", name, "</returns>", Environment.NewLine,
                                  "    [DataMemberAttribute('", name, "')] ", Environment.NewLine,
-                                 "    public ", edt, " ", name.ToLower(), "(", edt, " _", name.ToLower(), " = ", name, ")", Environment.NewLine,
+                                 "    public ", edt, " ", name.ToCamelCase(), "(", edt, " _", name.ToCamelCase(), " = ", name, ")", Environment.NewLine,
                                  "    {", Environment.NewLine,
                                  "        ", name, " = _", name, ";", Environment.NewLine,
                                  "        return ", name, ";", Environment.NewLine,
@@ -452,7 +452,7 @@ namespace Functions_for_Dynamics_Operations
         public static string ParmMethodShortCode(string name, string edt)
         {
             return string.Concat("    [DataMemberAttribute('", name, "')] ", Environment.NewLine,
-                                 "    public ", edt, " ", name.ToLower(), ";", Environment.NewLine);
+                                 "    public ", edt, " ", name.ToCamelCase(), ";", Environment.NewLine);
         }
 
         public static string ForLoopCode(int column)
@@ -552,13 +552,13 @@ namespace Functions_for_Dynamics_Operations
 
             foreach (var field in tablefieldedt.Fields)
             {
-                method += $"    /// <param name = '_{field.Field.ToLower()}'>Field as part of the alternate index</param>{Environment.NewLine}";
+                method += $"    /// <param name = '_{field.Field.ToCamelCase()}'>Field as part of the alternate index</param>{Environment.NewLine}";
             }
 
             method += $"    /// <param name = '_update'>Sets the select on update</param>{Environment.NewLine}";
             method += $"    /// <returns>Record Found</returns>{Environment.NewLine}";
 
-            string select = $"            select firstonly {tablefieldedt.Table.ToLower()}";
+            string select = $"            select firstonly {tablefieldedt.Table.ToCamelCase()}";
             string parms = "";
             string ifS = "        if (";
 
@@ -569,15 +569,15 @@ namespace Functions_for_Dynamics_Operations
 
                 if (parms == "")
                 {
-                    select += $"                where {tablefieldedt.Table.ToLower()}.{field.Field.ToLower()} == _{field.Field.ToLower()}";
-                    parms = $"    public static {tablefieldedt.Table} {methodName}({field.Edt} _{field.Field.ToLower()}";
-                    ifS += $"_{field.Field.ToLower()}";
+                    select += $"                where {tablefieldedt.Table.ToCamelCase()}.{field.Field.ToCamelCase()} == _{field.Field.ToCamelCase()}";
+                    parms = $"    public static {tablefieldedt.Table} {methodName}({field.Edt} _{field.Field.ToCamelCase()}";
+                    ifS += $"_{field.Field.ToCamelCase()}";
                 }
                 else
                 {
-                    select += $"                    && {tablefieldedt.Table.ToLower()}.{field.Field.ToLower()} == _{field.Field.ToLower()}";
-                    parms += $", {field.Edt} _{field.Field.ToLower()}";
-                    ifS += $" && _{field.Field.ToLower()}";
+                    select += $"                    && {tablefieldedt.Table.ToCamelCase()}.{field.Field.ToCamelCase()} == _{field.Field.ToCamelCase()}";
+                    parms += $", {field.Edt} _{field.Field.ToCamelCase()}";
+                    ifS += $" && _{field.Field.ToCamelCase()}";
                 }
             }
 
@@ -587,7 +587,7 @@ namespace Functions_for_Dynamics_Operations
             method += parms;
 
             method += "    {" + Environment.NewLine;
-            method += $"        {tablefieldedt.Table} {tablefieldedt.Table.ToLower()};{Environment.NewLine}";
+            method += $"        {tablefieldedt.Table} {tablefieldedt.Table.ToCamelCase()};{Environment.NewLine}";
             method += $"        {Environment.NewLine}";
 
             ifS += $"){Environment.NewLine}";
@@ -595,14 +595,14 @@ namespace Functions_for_Dynamics_Operations
             method += ifS;
 
             method += "        {" + Environment.NewLine;
-            method += $"            {tablefieldedt.Table.ToLower()}.selectforupdate(_update);{Environment.NewLine}";
+            method += $"            {tablefieldedt.Table.ToCamelCase()}.selectforupdate(_update);{Environment.NewLine}";
             method += $"        {Environment.NewLine}";
 
             method += select;
 
             method += "        }" + Environment.NewLine;
             method += $"        {Environment.NewLine}";
-            method += $"        return {tablefieldedt.Table.ToLower()};{Environment.NewLine}";
+            method += $"        return {tablefieldedt.Table.ToCamelCase()};{Environment.NewLine}";
             method += "    }";
 
             return method;
@@ -616,12 +616,12 @@ namespace Functions_for_Dynamics_Operations
 
             foreach (var field in tablefieldedt.Fields)
             {
-                method += $"    /// <param name = '_{field.Field.ToLower()}'>Field as part of the alternate index</param>{Environment.NewLine}";
+                method += $"    /// <param name = '_{field.Field.ToCamelCase()}'>Field as part of the alternate index</param>{Environment.NewLine}";
             }
 
             method += $"    /// <returns>Record exists</returns>{Environment.NewLine}";
 
-            string select = $"            select firstonly RecId from {tablefieldedt.Table.ToLower()}{Environment.NewLine}";
+            string select = $"            select firstonly RecId from {tablefieldedt.Table.ToCamelCase()}{Environment.NewLine}";
             string parms = "";
             string ifS = "        if (";
 
@@ -629,15 +629,15 @@ namespace Functions_for_Dynamics_Operations
             {
                 if (parms == "")
                 {
-                    select += $"                where {tablefieldedt.Table.ToLower()}.{field.Field.ToLower()} == _{field.Field.ToLower()}";
-                    parms = $"    public static Boolean exist({field.Edt} _{field.Field.ToLower()}";
-                    ifS += $"_{field.Field.ToLower()}";
+                    select += $"                where {tablefieldedt.Table.ToCamelCase()}.{field.Field.ToCamelCase()} == _{field.Field.ToCamelCase()}";
+                    parms = $"    public static Boolean exist({field.Edt} _{field.Field.ToCamelCase()}";
+                    ifS += $"_{field.Field.ToCamelCase()}";
                 }
                 else
                 {
-                    select += $"                    && {tablefieldedt.Table.ToLower()}.{field.Field.ToLower()} == _{field.Field.ToLower()}";
-                    parms += $", {field.Edt} _{field.Field.ToLower()}";
-                    ifS += $" && {field.Field.ToLower()}";
+                    select += $"                    && {tablefieldedt.Table.ToCamelCase()}.{field.Field.ToCamelCase()} == _{field.Field.ToCamelCase()}";
+                    parms += $", {field.Edt} _{field.Field.ToCamelCase()}";
+                    ifS += $" && {field.Field.ToCamelCase()}";
                 }
             }
 
@@ -647,7 +647,7 @@ namespace Functions_for_Dynamics_Operations
             method += parms;
 
             method += "    {" + Environment.NewLine;
-            method += $"        {tablefieldedt.Table} {tablefieldedt.Table.ToLower()};{Environment.NewLine}";
+            method += $"        {tablefieldedt.Table} {tablefieldedt.Table.ToCamelCase()};{Environment.NewLine}";
             method += $"        {Environment.NewLine}";
 
             ifS += $"){Environment.NewLine}";
@@ -659,7 +659,7 @@ namespace Functions_for_Dynamics_Operations
             method += select;
 
             method += $"            {Environment.NewLine}";
-            method += $"            if ({tablefieldedt.Table.ToLower()}.RecId != 0){Environment.NewLine}";
+            method += $"            if ({tablefieldedt.Table.ToCamelCase    ()}.RecId != 0){Environment.NewLine}";
             method += $"                return true;{Environment.NewLine}";
 
             method += "        }" + Environment.NewLine;

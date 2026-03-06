@@ -1,7 +1,7 @@
 ﻿using EnvDTE;
 using Functions_for_Dynamics_Operations.Functions;
 using Microsoft.Dynamics.AX.Framework.BestPractices;
-using Microsoft.Dynamics.AX.Framework.BestPractices.FixerIntegration;
+using Microsoft.Dynamics.AX.Framework.BestPractices.FixerExtensions;
 using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -142,35 +142,6 @@ namespace Functions_for_Dynamics_Operations
             }
 
             return dataTable;
-        }
-
-#warning TESTING
-        public static void JumpToBestPractice(string path)
-        {
-            // Microsoft.Dynamics.Framework.Tools.MetaModel
-            foreach (Microsoft.Dynamics.AX.Framework.BestPractices.Extensions.BestPracticeCheckerTargets item in Microsoft.Dynamics.AX.Framework.BestPractices.Extensions.BPExtensionsUtil.GetOnlyElementTargets())
-            {
-
-            }
-
-            BestPracticeFixerVSRunner bestPractice = new BestPracticeFixerVSRunner();
-
-            bestPractice.RunBPFixersOnProject(VStudioUtils.GetSelectedProjectNode());
-
-
-
-            foreach (var item in Microsoft.Dynamics.AX.Framework.BestPractices.BPDiagnosticsHandler.CurrentDiagnosticsHandler.Diagnostics())
-            {
-                DTE dte = Package.GetGlobalService(typeof(SDTE)) as DTE;
-
-                var obj = Microsoft.Dynamics.Framework.Tools.MetaModel.MetaModelUtility.GetDocDataFromRDT(item.Path);
-
-            }
-            /*
-            Microsoft.Dynamics.AX.Framework.BestPractices.IBestPracticeChecker bestPracticeChecker = (IBestPracticeChecker)new Microsoft.Dynamics.AX.Framework.BestPractices.CheckerBase();
-            
-            Microsoft.Dynamics.AX.Framework.BestPractices.CheckerBase checkerBase = new Microsoft.Dynamics.AX.Framework.BestPractices.CheckerBase();
-            */
         }
 
         protected string GetNewFileContent()

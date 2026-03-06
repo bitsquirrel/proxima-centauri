@@ -18,15 +18,15 @@ namespace Functions_for_Dynamics_Operations
         {
             string labelId = $"@{labelEditor.LabelFileCollectionSelected.Id}:";
 
-            foreach (var customization in axMenu.Customizations)
+            foreach (var mod in axMenu.PropertyModifications)
             {
-                switch (customization.Name)
+                switch (mod.Name)
                 {
                     case "Label":
-                        
-                        break;
-                    case "HelpText":
-                        
+                        if (IsNotLabelOrEmpty(mod.Value, labelId))
+                        {
+                            mod.Value = labelEditor.AddLabelFromTextInCode($"{axMenu.Name.Substring(0, axMenu.Name.IndexOf("."))}{mod.Name}~{mod.Value}", "", true);
+                        }
                         break;
                 }
             }

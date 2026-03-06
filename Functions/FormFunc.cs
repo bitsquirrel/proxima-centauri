@@ -306,8 +306,37 @@ namespace Functions_for_Dynamics_Operations
                     tableControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + tableControl.Name)}Help~{tableControl.HelpText}", "", true);
                 }
             }
+            else if (control is AxFormDateControl dateControl)
+            {
+                if (IsNotLabelOrEmpty(dateControl.Label, labelId))
+                {
+                    dateControl.Label = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + dateControl.Name)}~{dateControl.Label}", "", true);
+                }
+
+                if (IsNotLabelOrEmpty(dateControl.HelpText, labelId))
+                {
+                    dateControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + dateControl.Name)}Help~{dateControl.HelpText}", "", true);
+                }
+            }
+            else if (control is AxFormDateTimeControl dateTimeControl)
+            {
+                if (IsNotLabelOrEmpty(dateTimeControl.Label, labelId))
+                {
+                    dateTimeControl.Label = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + dateTimeControl.Name)}~{dateTimeControl.Label}", "", true);
+                }
+
+                if (IsNotLabelOrEmpty(dateTimeControl.HelpText, labelId))
+                {
+                    dateTimeControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + dateTimeControl.Name)}Help~{dateTimeControl.HelpText}", "", true);
+                }
+            }
             else if (control is AxFormTimeControl timeControl)
             {
+                if (IsNotLabelOrEmpty(timeControl.Label, labelId))
+                {
+                    timeControl.Label = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + timeControl.Name)}~{timeControl.Label}", "", true);
+                }
+
                 if (IsNotLabelOrEmpty(timeControl.HelpText, labelId))
                 {
                     timeControl.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, formName + timeControl.Name)}Help~{timeControl.HelpText}", "", true);

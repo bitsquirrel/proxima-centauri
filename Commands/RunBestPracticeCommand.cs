@@ -1,11 +1,16 @@
-﻿using Microsoft.Dynamics.AX.Framework.BestPractices.FixerIntegration;
+﻿using Microsoft.Dynamics.AX.Framework.BestPractices;
+using Microsoft.Dynamics.AX.Framework.BestPractices.FixerExtensions;
+using Microsoft.Dynamics.AX.Framework.BestPractices.FixerExtensions.Common;
+using Microsoft.Dynamics.AX.Metadata.MetaModel;
+using Microsoft.Dynamics.AX.Metadata.XppCompiler;
+using Microsoft.Dynamics.Framework.Tools.MetaModel.Core;
 using Microsoft.Dynamics.Framework.Tools.ProjectSupport;
+using Microsoft.Dynamics.Framework.Tools.ProjectSystem;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.Globalization;
-using System.Threading;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
@@ -94,16 +99,60 @@ namespace Functions_for_Dynamics_Operations
 
             try
             {
-                BestPracticeFixerVSRunner bestPractice = new BestPracticeFixerVSRunner();
+                throw new NotImplementedException("Best Practice Fixer command is not yet implemented. This is a placeholder for where the fixer logic will be invoked.");
+                /*
+                VSProjectNode projectNode = VStudioUtils.GetSelectedProjectOrFirstActiveProject();
+                if (projectNode == null)
+                {
+                    VStudioUtils.LogToGenOutput("No active D365 project found.");
+                    return;
+                }
 
-                ProjectNode projectNode = VStudioUtils.GetSelectedProjectNodeForBP();
+                IDesignMetaModelService designMetaModel = projectNode.DesignMetaModelService;
+                ModelInfo modelInfo = projectNode.GetProjectsModelInfo();
 
-                bestPractice.RunBPFixersOnProject(projectNode);
+                // TODO: Obtain IDiagnosticSink from the VS compiler service or implement a custom one
+                // IDiagnosticSink captures the BP diagnostic items that are then passed to the fixer
+                IDiagnosticSink diagnosticSink = null; // = <obtain from VS compiler services>;
+
+                // TODO: Obtain XppCompilerWrapper - requires MultipassAdministrator from XppParser.Pass2
+                // Add reference: Microsoft.Dynamics.AX.Framework.Xlnt.XppParser.Pass2.dll
+                // XppCompilerWrapper xppCompilerWrapper = new XppCompilerWrapper(multipassAdministrator, diagnosticSink);
+                XppCompilerWrapper xppCompilerWrapper = null;
+
+                if (diagnosticSink == null || xppCompilerWrapper == null)
+                {
+                    VStudioUtils.LogToGenOutput("Best Practice Fixer: Required compiler services not available. IDiagnosticSink and XppCompilerWrapper must be obtained from the VS compiler infrastructure.");
+                    return;
+                }
+
+                BestPracticeFixerOptions fixerOptions = new BestPracticeFixerOptions();
+
+                // Create the fixer runner via the factory
+                BestPracticeFixerRunnerFactory factory = new BestPracticeFixerRunnerFactory(
+                    modelInfo.Name,
+                    fixerOptions,
+                    diagnosticSink,
+                    designMetaModel.CurrentMetadataProvider,
+                    xppCompilerWrapper,
+                    (message) => VStudioUtils.LogToGenOutput(message));
+
+                BestPracticeFixerRunner runner = factory.Create();
+
+                // TODO: Collect diagnostic items by running BP checks first
+                // The Fix method requires the diagnostic results from a prior BP check run
+                // IEnumerable<CustomDiagnosticItem> diagnosticItems = <run BP checks or load from BPCheck.xml>;
+                // int fixCount = runner.Fix(diagnosticItems);
+                // VStudioUtils.LogToGenOutput($"Best Practice Fixer applied {fixCount} fix(es). Source control errors: {runner.SourceControlErrorCount}");
+                */
             }
             catch (ExceptionVsix ex)
             {
                 ex.Log("Unable to run best practice checker");
-
+            }
+            catch (Exception ex)
+            {
+                VStudioUtils.LogToGenOutput($"Error running best practice fixer - {ex}");
             }
         }
     }

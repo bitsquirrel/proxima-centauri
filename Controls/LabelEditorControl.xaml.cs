@@ -1010,6 +1010,9 @@ namespace Functions_for_Dynamics_Operations
 
         private void LabelfilesComB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (LabelFileCollectionSelected == null)
+                return;
+
             DLabelFile dLabelFile = LabelFileCollectionSelected.Files.FirstOrDefault(a => a.ResourceName == (string)LabelfilesComB.SelectedItem);
 
             if (dLabelFile != null && dLabelFile.Language == NoTranslateLanguage)
