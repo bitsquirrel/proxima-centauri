@@ -99,8 +99,10 @@
     <Compile Include="Commands\CommentsCommand.cs" />
     <Compile Include="Commands\ConstructMethodCommand.cs" />
     <Compile Include="Commands\CreateBPFileCommand.cs" />
+    <Compile Include="Commands\CreateLabelFromPropertyCommand.cs" />
     <Compile Include="Commands\CreateLabelInCodeCommand.cs" />
     <Compile Include="Commands\CreateParmMethodCommand.cs" />
+    <Compile Include="Commands\D365LabelPropertyHook.cs" />
     <Compile Include="Commands\DefaultModel.cs" />
     <Compile Include="Commands\ExistsCommand.cs" />
     <Compile Include="Commands\FindCommand.cs" />
