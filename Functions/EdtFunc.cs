@@ -17,6 +17,22 @@ namespace Functions_for_Dynamics_Operations
             {
                 axEdt.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, axEdt.Name)}Help~{axEdt.HelpText}", "", true);
             }
+
+            if (!axEdt.ArrayElements.IsNull())
+            {
+                foreach (AxEdtArrayElement arrayElement in axEdt.ArrayElements)
+                {
+                    if (IsNotLabelOrEmpty(arrayElement.Label, labelId))
+                    {
+                        arrayElement.Label = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, axEdt.Name + arrayElement.Name)}~{arrayElement.Label}", "", true);
+                    }
+
+                    if (IsNotLabelOrEmpty(arrayElement.HelpText, labelId))
+                    {
+                        arrayElement.HelpText = labelEditor.AddLabelFromTextInCode($"{CorrectLabel(model, axEdt.Name + arrayElement.Name)}Help~{arrayElement.HelpText}", "", true);
+                    }
+                }
+            }
         }
 
         public static void GenLabelsForEdt(LabelEditorControl labelEditor, AxEdtEnum axEdt, string model)
