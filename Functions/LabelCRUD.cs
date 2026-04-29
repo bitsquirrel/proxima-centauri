@@ -40,7 +40,7 @@ namespace Functions_for_Dynamics_Operations
                             {
                                 // Do not translate to the language being bypassed
                                 if (secondaryLabel.Language != noTransLang)
-                                    translatedValue = langTranslate.TranslateAzure(text, label.Language, secondaryLabel.Language);
+                                    translatedValue = langTranslate.Translate(text, label.Language, secondaryLabel.Language);
                             }
 
                             labelValues.Add(secondaryLabel.Language, new Label(translatedValue, description, descriptionExisted));
@@ -74,7 +74,7 @@ namespace Functions_for_Dynamics_Operations
                             string translatedValue = "";
 
                             if (file.Language != noTranslateLanguage)
-                                translatedValue = translate.TranslateAzure(label.Text, currentLanguageLabel.Key, file.Language);
+                                translatedValue = translate.Translate(label.Text, currentLanguageLabel.Key, file.Language);
 
                             labelValues.Add(file.Language, new Label(translatedValue, label.Description, label.DescriptionExisted));
                         }
@@ -102,7 +102,7 @@ namespace Functions_for_Dynamics_Operations
                         {
                             Label labelToUpdate = labelValues.First(e => e.Key == file.Language).Value;
 
-                            labelToUpdate.Text = translate.TranslateAzure(label.Text, dlabel.Language, file.Language);
+                            labelToUpdate.Text = translate.Translate(label.Text, dlabel.Language, file.Language);
                             labelToUpdate.Description = label.Description;
                         }
                     }

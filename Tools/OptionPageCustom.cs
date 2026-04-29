@@ -5,6 +5,17 @@ namespace Functions_for_Dynamics_Operations
 {
     internal class OptionPageCustom : DialogPage
     {
+        [Category("DeepL Translate")]
+        [DisplayName("API Key")]
+        [PasswordPropertyText(true)]
+        [Description("DeepL API authentication key (get free key at https://www.deepl.com/pro-api)")]
+        public string DeepLApiKey { get; set; }
+
+        [Category("DeepL Translate")]
+        [DisplayName("API Url")]
+        [Description("DeepL API endpoint URL (use https://api-free.deepl.com/v2/translate for free tier, https://api.deepl.com/v2/translate for pro)")]
+        public string DeepLUrl { get; set; } = "https://api-free.deepl.com/v2/translate";
+
         [Category("Azure Translate")]
         [DisplayName("Url")]
         [Description("Azure translation Url")]

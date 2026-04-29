@@ -19,6 +19,13 @@ namespace Functions_for_Dynamics_Operations
             OptionPageCustom options = (OptionPageCustom)AsyncPackage.GetDialogPage(typeof(OptionPageCustom));
             if (options != null) 
             {
+                // Load DeepL settings
+                DeepLTranslate.ApiKey = options.DeepLApiKey;
+                DeepLTranslate.Url = string.IsNullOrWhiteSpace(options.DeepLUrl) 
+                    ? "https://api-free.deepl.com/v2/translate" 
+                    : options.DeepLUrl;
+
+                // Load Azure settings
                 AzureTranslate.Url = options.TranslateUrl;
                 AzureTranslate.Secret = options.TranslateKey;
                 AzureTranslate.Region = options.TranslateRegion;

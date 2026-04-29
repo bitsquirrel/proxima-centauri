@@ -88,6 +88,9 @@ namespace Functions_for_Dynamics_Operations
             {   // Initialize the translator
                 Translate = new LangTranslate();
 
+                // Initialize translation provider selector
+                InitializeTranslationProvider();
+
                 LoadlabelIds();
 
                 PrimaryLabelGridView.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -99,6 +102,51 @@ namespace Functions_for_Dynamics_Operations
                 InitLastValues();
 
                 ExcludeLanguageTranslate();
+            }
+        }
+
+        private void InitializeTranslationProvider()
+        {
+            TranslationProviderComB.Items.Clear();
+            TranslationProviderComB.Items.Add("DeepL");
+            TranslationProviderComB.Items.Add("Azure");
+
+            // Load saved setting or default to DeepL
+            Settings settings = VStudioCache.GetSettings(Model);
+            if (settings.TransProvider == null || settings.TransProvider == "")
+            {
+                settings.TransProvider = "DeepL";
+                VStudioCache.SaveSettings(settings);
+            }
+
+            TranslationProviderComB.SelectedItem = settings.TransProvider;
+
+            // Set the provider on the translator
+            Translate.Provider = settings.TransProvider == "Azure" 
+                ? TranslationProvider.Azure 
+                : TranslationProvider.DeepL;
+        }
+
+        private void TranslationProviderComB_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (TranslationProviderComB.SelectedItem != null && Translate != null)
+            {
+                string selected = TranslationProviderComB.SelectedItem.ToString();
+
+                // Update the translator provider
+                Translate.Provider = selected == "Azure" 
+                    ? TranslationProvider.Azure 
+                    : TranslationProvider.DeepL;
+
+                // Save the setting
+                Settings settings = VStudioCache.GetSettings(Model);
+                if (settings.TransProvider != selected)
+                {
+                    settings.TransProvider = selected;
+                    VStudioCache.SaveSettings(settings);
+                }
+
+                VStudioUtils.LogToGenOutput($"Translation provider switched to: {selected}");
             }
         }
 
