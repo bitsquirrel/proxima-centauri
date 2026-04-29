@@ -14,12 +14,44 @@ using System.Windows.Controls;
 namespace Functions_for_Dynamics_Operations
 {
     /// <summary>
+    /// Represents an object type that can be selected for code search
+    /// </summary>
+    public class ObjectTypeItem : INotifyPropertyChanged
+    {
+        private bool _isSelected;
+
+        public string DisplayName { get; set; }
+        public string FolderName { get; set; }
+
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
     /// Interaction logic for CodeSearchControl.
     /// </summary>
     public partial class CodeSearchControl : UserControl
     {
         private ListSortDirection _dir = ListSortDirection.Ascending;
         private string _sortCol = null;
+        private List<ObjectTypeItem> _objectTypes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeSearchControl"/> class.
@@ -28,6 +60,8 @@ namespace Functions_for_Dynamics_Operations
         {
             this.InitializeComponent();
 
+            InitializeObjectTypes();
+
             SearchText.KeyDown += SearchText_KeyDown;
             // Allow the user to resize
             SearchDataGrid.AllowUserToResizeColumns = true;
@@ -35,6 +69,46 @@ namespace Functions_for_Dynamics_Operations
             SearchDataGrid.CellMouseDoubleClick += SearchDataGrid_CellMouseDoubleClick;
 
             SearchDataGrid.ColumnHeaderMouseClick += SearchDataGrid_ColumnHeaderMouseClick;
+        }
+
+        private void InitializeObjectTypes()
+        {
+            _objectTypes = new List<ObjectTypeItem>
+            {
+                new ObjectTypeItem { DisplayName = "Classes", FolderName = "axclass", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Tables", FolderName = "axtable", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Forms", FolderName = "axform", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Queries", FolderName = "axquery", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Views", FolderName = "axview", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Maps", FolderName = "axmap", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Data Entity Views", FolderName = "axdataentityview", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Form Parts", FolderName = "axformpart", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Info Parts", FolderName = "axinfopart", IsSelected = true },
+                new ObjectTypeItem { DisplayName = "Tiles", FolderName = "axtile", IsSelected = true }
+            };
+
+            ObjectTypesListBox.ItemsSource = _objectTypes;
+        }
+
+        private void SelectAllBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in _objectTypes)
+            {
+                item.IsSelected = true;
+            }
+        }
+
+        private void DeselectAllBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in _objectTypes)
+            {
+                item.IsSelected = false;
+            }
+        }
+
+        private List<string> GetSelectedFolders()
+        {
+            return _objectTypes.Where(x => x.IsSelected).Select(x => x.FolderName).ToList();
         }
 
         private void SearchDataGrid_ColumnHeaderMouseClick(object sender, System.Windows.Forms.DataGridViewCellMouseEventArgs e)
@@ -107,6 +181,15 @@ namespace Functions_for_Dynamics_Operations
         {
             try
             {
+                // Get the selected folders
+                List<string> selectedFolders = GetSelectedFolders();
+
+                if (selectedFolders.Count == 0)
+                {
+                    VStudioUtils.LogToGenOutput($"Please select at least one object type to search");
+                    return;
+                }
+
                 // This triggers opening of other tools for no reason
                 CodeViewUtils.DoNotLaunchOtherTools = true;
 
@@ -114,7 +197,7 @@ namespace Functions_for_Dynamics_Operations
 
                 SearchDataGrid.DataSource = null;
                 // This is an async task to search code and resetting the Do Not Launch cannot be done here
-                Task t = new CodeSearchController(SearchText.Text).FindCodeAsync(SearchDataGrid);
+                Task t = new CodeSearchController(SearchText.Text, selectedFolders).FindCodeAsync(SearchDataGrid);
             }
             catch (ExceptionVsix ex)
             {

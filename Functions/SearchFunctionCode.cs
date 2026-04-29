@@ -16,11 +16,14 @@ namespace Functions_for_Dynamics_Operations.Functions
         internal readonly string IncludedFolders = "axclass,axdataentityview,axform,axformpart,axinfopart,axmap,axquery,axtable,axtile,axview";
         public DirectoryInfo DirectoryInfo;
         public string TextToSearch;
+        public List<string> SelectedFolders;
 
-        public SearchFunctionCode(DirectoryInfo directoryInfo, string textToSearch, bool ignoreComments)
+        public SearchFunctionCode(DirectoryInfo directoryInfo, string textToSearch, bool ignoreComments, List<string> selectedFolders = null)
         {
             DirectoryInfo = directoryInfo;
             TextToSearch = textToSearch;
+            // If no specific folders are selected, use all folders from IncludedFolders
+            SelectedFolders = selectedFolders ?? IncludedFolders.Split(',').ToList();
         }
 
         /// <summary>
@@ -30,15 +33,14 @@ namespace Functions_for_Dynamics_Operations.Functions
         public List<CodeSearchFound> RunLogic()
         {
             List<CodeSearchFound> codeObjects = new List<CodeSearchFound>();
-            List<string> values = IncludedFolders.Split(',').ToList();
 
             if (TextToSearch == "" || TextToSearch.Replace(" ", "").Length == 0)
                 return codeObjects;
             // Search the files in the directory
             foreach (var directory in DirectoryInfo.GetDirectories())
             {
-                // Only search the folders that are included
-                if (values.Contains(directory.Name.ToLower()))
+                // Only search the folders that are selected by the user
+                if (SelectedFolders.Contains(directory.Name.ToLower()))
                 {
                     SearchFiles(codeObjects, directory);
                 }            
@@ -233,16 +235,18 @@ namespace Functions_for_Dynamics_Operations.Functions
     {
         public string TextToSearch { get; private set; }
         public string SearchType { get; set; }
+        public List<string> SelectedFolders { get; private set; }
 
         internal class Threader
         {
             internal DirectoryInfo DirectoryInfo { get; set; }
             public string TextToSearch { get; set; }
             public bool IgnoreComments { get; set; }
+            public List<string> SelectedFolders { get; set; }
 
             public Task<List<CodeSearchFound>> DoWorkAsync()
             {
-                return Task.Run(() => new SearchFunctionCode(DirectoryInfo, TextToSearch, IgnoreComments).RunLogic());
+                return Task.Run(() => new SearchFunctionCode(DirectoryInfo, TextToSearch, IgnoreComments, SelectedFolders).RunLogic());
             }
         }
 
@@ -300,16 +304,22 @@ namespace Functions_for_Dynamics_Operations.Functions
                             model.Name.ToLower() != "resources" && model.Name.ToLower() != "webcontent" && model.Name.ToLower() != "xppmetadata" &&
                             model.Name.ToLower() != ".pkgrefgen")
                         {
-                            threads.Add(new Threader() { DirectoryInfo = model, TextToSearch = TextToSearch });
+                            threads.Add(new Threader() 
+                            { 
+                                DirectoryInfo = model, 
+                                TextToSearch = TextToSearch,
+                                SelectedFolders = SelectedFolders
+                            });
                         }
                     }
                 }
             }
         }
 
-        public CodeSearchController(string textToSearch)
+        public CodeSearchController(string textToSearch, List<string> selectedFolders = null)
         {
             TextToSearch = textToSearch;
+            SelectedFolders = selectedFolders ?? "axclass,axdataentityview,axform,axformpart,axinfopart,axmap,axquery,axtable,axtile,axview".Split(',').ToList();
         }
     }
 
