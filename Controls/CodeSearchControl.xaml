@@ -16,7 +16,7 @@
             <Button x:Name="FileSearchCmd" VerticalAlignment="Top" Margin="5,7,0,0" Content="Search" Click="CodeSearchCmd_Click" FontWeight="Bold" Width="150" Height="22"/>
         </DockPanel>
         <DockPanel Height="60" Margin="10,35,10,0" LastChildFill="False" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-            <Label x:Name="labelObjectTypes" VerticalAlignment="Top" Content="Object Types:" Width="90" Height="22" FontWeight="Bold" Margin="0,2,0,0"/>
+            <Label x:Name="labelObjectTypes" VerticalAlignment="Top" Content="Object Types:" Width="90" Height="22" FontWeight="Bold" FontFamily="Arial Black" Background="{x:Null}" Foreground="CadetBlue" Margin="0,2,0,0"/>
             <ListBox x:Name="ObjectTypesListBox" Width="620" Height="50" SelectionMode="Multiple">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -29,8 +29,15 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button x:Name="SelectAllBtn" VerticalAlignment="Top" Margin="5,2,0,0" Content="Select All" Click="SelectAllBtn_Click" FontWeight="Bold" Width="70" Height="22"/>
-            <Button x:Name="DeselectAllBtn" VerticalAlignment="Top" Margin="5,2,0,0" Content="Deselect All" Click="DeselectAllBtn_Click" FontWeight="Bold" Width="75" Height="22"/>
+            <Grid Margin="5,2,0,0" Height="50" Width="150">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="22"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="SelectAllBtn" Grid.Row="0" Content="Select All" Click="SelectAllBtn_Click" FontWeight="Bold" Width="150" Height="22"/>
+                <Button x:Name="DeselectAllBtn" Grid.Row="2" Content="Deselect All" Click="DeselectAllBtn_Click" FontWeight="Bold" Width="150" Height="22"/>
+            </Grid>
         </DockPanel>
         <Grid Margin = "10,100,2,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
