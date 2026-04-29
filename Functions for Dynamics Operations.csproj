@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>\\dev.pylades.local\dfs\Backup\Super Awesome\Functions for Dynamics %28 Dynamics365F&amp;O %29\47\Functions for Dynamics 2022\</OutputPath>
+    <OutputPath>\\dev.pylades.local\dfs\Backup\Super Awesome\Functions for Dynamics %28 Dynamics365F&amp;O %29\47\Functions for Dynamics\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

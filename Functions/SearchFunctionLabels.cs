@@ -141,7 +141,17 @@ namespace Functions_for_Dynamics_Operations
                             // Split the content into lines
                             List<string> lines = contentString.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
                             // Fetch all the matches from the lines for the text to search
-                            foreach (string labelMatch in lines.Where(a => a.ToLower().Contains(TextToSearch.ToLower())))
+                            IEnumerable<string> matchingLines;
+                            if (SearchType == "Exact")
+                            {
+                                matchingLines = lines.Where(a => a.Contains(TextToSearch));
+                            }
+                            else
+                            {
+                                matchingLines = lines.Where(a => a.ToLower().Contains(TextToSearch.ToLower()));
+                            }
+
+                            foreach (string labelMatch in matchingLines)
                             {
                                 if (labelMatch.Trim().StartsWith(";"))
                                 {

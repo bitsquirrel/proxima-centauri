@@ -1,11 +1,14 @@
 ﻿using Functions_for_Dynamics_Operations.Functions;
 using Microsoft.Dynamics.AX.Metadata.MetaModel;
-using Task = System.Threading.Tasks.Task;
 using Microsoft.VisualStudio.Shell;
-using System.ComponentModel.Design;
 using Newtonsoft.Json.Linq;
-using System.Windows.Forms;
 using System;
+using System.ComponentModel.Design;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using System.Xml;
+using Task = System.Threading.Tasks.Task;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -107,6 +110,19 @@ namespace Functions_for_Dynamics_Operations
                     }
                     else
                     {
+                        // Pick up the default config (default is the config under the users documents) to check if we are cloud hosted
+                        var defaultConfig = Microsoft.Dynamics.Framework.Tools.Configuration.ConfigurationHelper.InstalledConfigurationEntries.FirstOrDefault(a => a.Item1 == "DefaultConfig");
+                        // The XML fails conversion dynamically - so load it direct to XML
+                        XmlDocument xmlDocument = new XmlDocument();
+                        xmlDocument.LoadXml(File.ReadAllText(defaultConfig.Item2));
+
+                        Microsoft.Dynamics.Framework.Tools.Configuration.DevelopmentConfiguration developmentConfiguration = Microsoft.Dynamics.Framework.Tools.Configuration.ConfigurationHelper.CurrentConfiguration;
+
+                        developmentConfiguration.DefaultModelForNewProjects = model.Name;
+
+                        // DefaultModelForNewProjects
+
+                        /*
                         Microsoft.Dynamics.Framework.Tools.Configuration.DevelopmentConfiguration developmentConfiguration = new Microsoft.Dynamics.Framework.Tools.Configuration.DevelopmentConfiguration
                         {
                             DefaultModelForNewProjects = model.Name
@@ -115,6 +131,7 @@ namespace Functions_for_Dynamics_Operations
                         string configFileName = RuntimeHost.GetOneBoxConfigFileName();
                         // Microsoft changed the name of the config file and its internal so we need to manually set it
                         Microsoft.Dynamics.Framework.Tools.Configuration.ConfigurationHelper.SaveConfiguration(configFileName, developmentConfiguration);
+                        */
                     }
                 }
             }
