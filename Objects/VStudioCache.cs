@@ -28,7 +28,7 @@ namespace Functions_for_Dynamics_Operations
             settings.AutoTrans = userSettingsStore.PropertyExists(userSettingsStoreName, "AUTOTRANS") ? userSettingsStore.GetBoolean(userSettingsStoreName, "AUTOTRANS") : false;
             settings.NoTransLang = userSettingsStore.PropertyExists(userSettingsStoreName, "NOTRANSLANG") ? userSettingsStore.GetString(userSettingsStoreName, "NOTRANSLANG") : "";
             settings.NoDefaultDesc = userSettingsStore.PropertyExists(userSettingsStoreName, "NODEFAULTDESC") ? userSettingsStore.GetBoolean(userSettingsStoreName, "NODEFAULTDESC") : false;
-            settings.TransProvider = userSettingsStore.PropertyExists(userSettingsStoreName, "TRANSPROVIDER") ? userSettingsStore.GetString(userSettingsStoreName, "TRANSPROVIDER") : "DeepL";
+            settings.TransProvider = userSettingsStore.PropertyExists(userSettingsStoreName, "TRANSPROVIDER") ? userSettingsStore.GetString(userSettingsStoreName, "TRANSPROVIDER") : "Azure";
 
             return settings;
         }
@@ -53,7 +53,7 @@ namespace Functions_for_Dynamics_Operations
             userSettingsStore.SetBoolean(userSettingsStoreName, "AUTOTRANS", settings.AutoTrans);
             userSettingsStore.SetString(userSettingsStoreName, "NOTRANSLANG", settings.NoTransLang);
             userSettingsStore.SetBoolean(userSettingsStoreName, "NODEFAULTDESC", settings.NoDefaultDesc);
-            userSettingsStore.SetString(userSettingsStoreName, "TRANSPROVIDER", settings.TransProvider ?? "DeepL");
+            userSettingsStore.SetString(userSettingsStoreName, "TRANSPROVIDER", settings.TransProvider ?? "Azure");
         }
 
         private static string GetCacheId()

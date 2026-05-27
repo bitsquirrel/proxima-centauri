@@ -21,6 +21,14 @@ namespace Functions_for_Dynamics_Operations
 
             if ((null != Window) && (null != Window.Frame))
             {
+                OptionPageCustom options = (OptionPageCustom)AsyncPackage.GetDialogPage(typeof(OptionPageCustom));
+                if (options != null && Window.Content is CodeSearchControl codeSearch)
+                {
+                    if (options.UseVsTheme)
+                        codeSearch.ApplyVsTheme();
+                    else
+                        codeSearch.ApplyColors(options.LabelForeColor, options.LabelBackColor, options.GridForeColor, options.GridBackColor);
+                }
                 return true;
             }
 

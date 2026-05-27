@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
@@ -70,6 +70,8 @@
       <DependentUpon>PrefixForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Commands\GenLabelsProjectCommand.cs" />
+    <Compile Include="Functions\CustomLabelService.cs" />
+    <Compile Include="Functions\CustomLabelServiceRegistrar.cs" />
     <Compile Include="Functions\GenLabelsForProjectItems.cs" />
     <Compile Include="ToolboxCode\DimensionCode.cs" />
     <Compile Include="ToolboxCode\ExceptionCode.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Utilities\DynaxUtils.cs" />
     <Compile Include="Utilities\FormUtils.cs" />
     <Compile Include="Utilities\GridUtils.cs" />
+    <Compile Include="Utilities\EditorColorHelper.cs" />
     <Compile Include="Utilities\LabelUtils.cs" />
     <Compile Include="Utilities\LogfileUtility.cs" />
     <Compile Include="Utilities\ModelUtils.cs" />

@@ -155,8 +155,6 @@ namespace Functions_for_Dynamics_Operations
         /// <param name="readOnly">Not spelled incorrectly - readOnly is a reserved word</param>
         public static void SetGridLayoutEditor(DataGridView dataGridView, Boolean readOnly = false)
         {
-            dataGridView.BackgroundColor = System.Drawing.Color.DarkGray;
-
             dataGridView.Columns[0].Width = 70;
             dataGridView.Columns[0].ReadOnly = true;
 
@@ -170,8 +168,6 @@ namespace Functions_for_Dynamics_Operations
             dataGridView.Columns[4].Visible = false;
             // Original label Description field
             dataGridView.Columns[5].Visible = false;
-
-            dataGridView.RowsDefaultCellStyle.ForeColor = System.Drawing.Color.Black;
 
             dataGridView.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
@@ -241,8 +237,6 @@ namespace Functions_for_Dynamics_Operations
 
         public static void SetGridLayoutSearch(DataGridView dataGridView)
         {
-            dataGridView.BackgroundColor = System.Drawing.Color.DarkGray;
-
             dataGridView.Columns[0].Name = "Model";
             dataGridView.Columns[0].Width = 120;
             dataGridView.Columns[0].ReadOnly = true;
@@ -260,14 +254,10 @@ namespace Functions_for_Dynamics_Operations
             dataGridView.Columns[3].Name = "Comment";
             dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView.Columns[3].ReadOnly = true;
-
-            dataGridView.RowsDefaultCellStyle.ForeColor = System.Drawing.Color.Black;
         }
 
         public static void SetGridLayoutSearchCode(DataGridView dataGridView)
         {
-            dataGridView.BackgroundColor = System.Drawing.Color.DarkGray;
-
             dataGridView.Columns[0].Name = "Type";
             dataGridView.Columns[0].Width = 200;
             dataGridView.Columns[0].ReadOnly = true;
@@ -282,14 +272,10 @@ namespace Functions_for_Dynamics_Operations
 
             dataGridView.Columns[3].Name = "FullName";
             dataGridView.Columns[3].Visible = false;
-
-            dataGridView.RowsDefaultCellStyle.ForeColor = System.Drawing.Color.Black;
         }
 
         public static void SetGridLayoutBP(DataGridView dataGridView)
         {
-            dataGridView.BackgroundColor = System.Drawing.Color.DarkGray;
-
             dataGridView.Columns[0].HeaderText = "Severity";
             dataGridView.Columns[0].Name = "Severity";
             dataGridView.Columns[0].Width = 120;
@@ -311,8 +297,6 @@ namespace Functions_for_Dynamics_Operations
             dataGridView.Columns[4].Visible = false;
             // Hide the moniker
             dataGridView.Columns[5].Visible = false;
-
-            dataGridView.RowsDefaultCellStyle.ForeColor = System.Drawing.Color.Black;
         }
 
         public void GridTesting(DataGridView gridView)

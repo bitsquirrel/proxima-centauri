@@ -62,6 +62,15 @@ namespace Functions_for_Dynamics_Operations
                             LabelEditor.InitForm();
                         }
 
+                        // Apply user-configured editor colors (safe to call on every open).
+                        if (options != null)
+                        {
+                            if (options.UseVsTheme)
+                                LabelEditor.ApplyVsTheme();
+                            else
+                                LabelEditor.ApplyColors(options.LabelForeColor, options.LabelBackColor, options.GridForeColor, options.GridBackColor);
+                        }
+
                         return true;
                     }
                 }

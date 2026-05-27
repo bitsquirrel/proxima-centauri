@@ -56,6 +56,17 @@ namespace Functions_for_Dynamics_Operations
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeSearchControl"/> class.
         /// </summary>
+        /// <summary>Applies the current Visual Studio theme colors to all labels and data grids.</summary>
+        public void ApplyVsTheme() => EditorColorHelper.ApplyVsTheme(this);
+
+        /// <summary>
+        /// Applies user-configured foreground/background colors to all labels, the root background, and data grids.
+        /// </summary>
+        public void ApplyColors(System.Drawing.Color foreColor, System.Drawing.Color backColor, System.Drawing.Color gridForeColor, System.Drawing.Color gridBackColor)
+        {
+            EditorColorHelper.Apply(this, foreColor, backColor, gridForeColor, gridBackColor);
+        }
+
         public CodeSearchControl()
         {
             this.InitializeComponent();

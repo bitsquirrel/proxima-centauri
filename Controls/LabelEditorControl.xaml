@@ -27,9 +27,9 @@
             <Label x:Name="label1" Content="Language" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" FontFamily="Arial Black" Background="{x:Null}" Foreground="CadetBlue"/>
             <ComboBox x:Name="LabelfilesComB" HorizontalAlignment="Left" Margin="5,6,0,0" VerticalAlignment="Top" Width="200" Height="24" FontFamily="Arial Black" SelectionChanged="LabelfilesComB_SelectionChanged"/>
             <Label x:Name="label1_Copy" Content="Search" Height="24" FontWeight="Bold" Margin="5,6,0,0" Width="105" Foreground="CadetBlue"/>
-            <TextBox x:Name="SearchTextBox" Height="24" TextWrapping="Wrap" TextChanged="SearchTextBox_TextChanged" Margin="5,6,0,0" Width="537"/>
-            <Button x:Name="ClearSearchCmd" Margin="5,6,0,0" Height="24" VerticalAlignment="Top" Content="Clear" Click="ClearSearchCmd_Click" FontWeight="Bold" Width="75"/>
-            <Button x:Name="SyncEmpty" Content="Sync" Click="SyncEmpty_Click" FontWeight="Bold" Width="75" Height="24" Margin="4,4,0,0"/>
+            <TextBox x:Name="SearchTextBox" Height="24" TextWrapping="Wrap" TextChanged="SearchTextBox_TextChanged" Margin="5,6,0,0" Width="551"/>
+            <Button x:Name="ClearSearchCmd" Margin="5,6,0,0" Height="24" Content="Clear" Click="ClearSearchCmd_Click" FontWeight="Bold" Width="108"/>
+            <Button x:Name="SyncEmpty" Content="Sync" Click="SyncEmpty_Click" FontWeight="Bold" Width="108" Height="24" Margin="4,4,0,0"/>
         </DockPanel>
         <Grid Margin = "10,75,-5,16" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>

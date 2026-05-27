@@ -1,10 +1,36 @@
 ﻿using Microsoft.VisualStudio.Shell;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace Functions_for_Dynamics_Operations
 {
     internal class OptionPageCustom : DialogPage
     {
+        [Category("Label Editor Appearance")]
+        [DisplayName("Use Visual Studio theme")]
+        [Description("When enabled, all editor and search controls automatically follow the current Visual Studio color theme (dark/light/blue). Custom color settings below are ignored.")]
+        public bool UseVsTheme { get; set; } = true;
+
+        [Category("Label Editor Appearance")]
+        [DisplayName("Label foreground")]
+        [Description("Foreground (text) color used for the field labels. Only applied when 'Use Visual Studio theme' is disabled.")]
+        public Color LabelForeColor { get; set; } = Color.CadetBlue;
+
+        [Category("Label Editor Appearance")]
+        [DisplayName("Editor background")]
+        [Description("Background color of the tool windows. Only applied when 'Use Visual Studio theme' is disabled.")]
+        public Color LabelBackColor { get; set; } = Color.Transparent;
+
+        [Category("Label Editor Appearance")]
+        [DisplayName("Grid foreground")]
+        [Description("Text color for the data grids. Only applied when 'Use Visual Studio theme' is disabled.")]
+        public Color GridForeColor { get; set; } = Color.FromArgb(220, 220, 220);
+
+        [Category("Label Editor Appearance")]
+        [DisplayName("Grid background")]
+        [Description("Background color for the data grids. Only applied when 'Use Visual Studio theme' is disabled.")]
+        public Color GridBackColor { get; set; } = Color.FromArgb(30, 30, 30);
+
         [Category("DeepL Translate")]
         [DisplayName("API Key")]
         [PasswordPropertyText(true)]

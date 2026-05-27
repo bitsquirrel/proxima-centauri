@@ -34,6 +34,14 @@ namespace Functions_for_Dynamics_Operations
                     BpEditor = (BPEditorControl)Window.Content;
                     if (BpEditor != null)
                     {
+                        OptionPageCustom options = (OptionPageCustom)AsyncPackage.GetDialogPage(typeof(OptionPageCustom));
+                        if (options != null)
+                        {
+                            if (options.UseVsTheme)
+                                BpEditor.ApplyVsTheme();
+                            else
+                                BpEditor.ApplyColors(options.LabelForeColor, options.LabelBackColor, options.GridForeColor, options.GridBackColor);
+                        }
                         return true;
                     }
                 }

@@ -97,6 +97,12 @@ namespace Functions_for_Dynamics_Operations
         public int OnAfterOpenProject(IVsHierarchy pHierarchy, int fAdded)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
+
+            // Try to install our custom label-service interceptor as soon as a Dynamics project
+            // is loaded. By this point Microsoft's LabelService has been created, so we can
+            // safely wrap it. Install() is idempotent and silently skips if already installed.
+            CustomLabelServiceRegistrar.Install(this);
+
             // For some weird reason this method is called when opening a window - which is not a tool
             if (!CodeViewUtils.DoNotLaunchOtherTools)
                 OnOpenToolWindow();

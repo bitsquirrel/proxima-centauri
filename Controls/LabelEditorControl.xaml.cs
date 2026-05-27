@@ -7,6 +7,7 @@ using System.Linq;
 using System.Xml;
 using System;
 using Functions_for_Dynamics_Operations.Objects;
+using Functions_for_Dynamics_Operations.Utilities;
 
 namespace Functions_for_Dynamics_Operations
 {
@@ -111,11 +112,11 @@ namespace Functions_for_Dynamics_Operations
             TranslationProviderComB.Items.Add("DeepL");
             TranslationProviderComB.Items.Add("Azure");
 
-            // Load saved setting or default to DeepL
+            // Load saved setting or default to Azure
             Settings settings = VStudioCache.GetSettings(Model);
             if (settings.TransProvider == null || settings.TransProvider == "")
             {
-                settings.TransProvider = "DeepL";
+                settings.TransProvider = "Azure";
                 VStudioCache.SaveSettings(settings);
             }
 
@@ -125,6 +126,17 @@ namespace Functions_for_Dynamics_Operations
             Translate.Provider = settings.TransProvider == "Azure" 
                 ? TranslationProvider.Azure 
                 : TranslationProvider.DeepL;
+        }
+
+        /// <summary>Applies the current Visual Studio theme colors to all labels and data grids.</summary>
+        public void ApplyVsTheme() => EditorColorHelper.ApplyVsTheme(this);
+
+        /// <summary>
+        /// Applies user-configured foreground/background colors to all labels, the root background, and data grids.
+        /// </summary>
+        public void ApplyColors(System.Drawing.Color foreColor, System.Drawing.Color backColor, System.Drawing.Color gridForeColor, System.Drawing.Color gridBackColor)
+        {
+            EditorColorHelper.Apply(this, foreColor, backColor, gridForeColor, gridBackColor);
         }
 
         private void TranslationProviderComB_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
