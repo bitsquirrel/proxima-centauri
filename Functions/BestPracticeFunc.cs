@@ -1,7 +1,5 @@
 ﻿using EnvDTE;
 using Functions_for_Dynamics_Operations.Functions;
-using Microsoft.Dynamics.AX.Framework.BestPractices;
-using Microsoft.Dynamics.AX.Framework.BestPractices.FixerExtensions;
 using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;

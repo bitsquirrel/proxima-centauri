@@ -1,6 +1,3 @@
-﻿using Microsoft.Dynamics.AX.Framework.BestPractices;
-using Microsoft.Dynamics.AX.Framework.BestPractices.FixerExtensions;
-using Microsoft.Dynamics.AX.Framework.BestPractices.FixerExtensions.Common;
 using Microsoft.Dynamics.AX.Metadata.MetaModel;
 using Microsoft.Dynamics.AX.Metadata.XppCompiler;
 using Microsoft.Dynamics.Framework.Tools.MetaModel.Core;
