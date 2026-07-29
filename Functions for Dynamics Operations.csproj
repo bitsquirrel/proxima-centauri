@@ -185,21 +185,6 @@
     <Reference Include="Microsoft.Dynamics.AX.Data.Management.Sync">
       <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\49\Dlls\Microsoft.Dynamics.AX.Data.Management.Sync.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeExtensions">
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\49\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFixerExtensions">
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\49\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFixerExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFramework">
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\49\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPracticeFramework.UIRules">
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\49\Dlls\Microsoft.Dynamics.AX.Framework.BestPracticeFramework.UIRules.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Dynamics.AX.Framework.BestPractices.Common">
-      <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\49\Dlls\Microsoft.Dynamics.AX.Framework.BestPractices.Common.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Dynamics.AX.Framework.Diagnostics">
       <HintPath>\\dev-file01.dev.pylades.local\backup$\Super Awesome\Functions for Dynamics ( Dynamics365F&amp;O )\49\Dlls\Microsoft.Dynamics.AX.Framework.Diagnostics.dll</HintPath>
     </Reference>
