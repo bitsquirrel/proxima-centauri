@@ -572,7 +572,7 @@ namespace Functions_for_Dynamics_Operations
                         dgv.Rows[dgv.SelectedRows[0].Index].Cells[0].Value = LabelFileSelected.Language;
                         dgv.Rows[dgv.SelectedRows[0].Index].Cells[3].Value = description;
                         dgv.Rows[dgv.SelectedRows[0].Index].Cells[4].Value = id;
-                        dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                        dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
                         dgv.Rows[e.RowIndex].ErrorText = "";
 
                         DoNotEvaluate = false;
