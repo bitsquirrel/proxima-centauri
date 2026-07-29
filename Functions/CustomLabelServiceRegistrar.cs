@@ -9,7 +9,7 @@ namespace Functions_for_Dynamics_Operations
     /// <summary>
     /// Installs <see cref="CustomLabelService"/> into Microsoft''s static <c>AxServiceProvider</c>
     /// so any caller of <c>AxServiceProvider.GetService&lt;ILabelService&gt;()</c> receives our
-    /// wrapper. Decompiled findings (10.0.48):
+    /// wrapper. Decompiled findings (10.0.49):
     ///  - <c>AxServiceProvider.serviceProvider</c> is a private static field, set first-write-wins via <c>SetSite</c>.
     ///  - <c>CoreUtility.ServiceProvider</c> is just a passthrough to <c>AxServiceProvider.ServiceProvider</c>,
     ///    so patching <c>AxServiceProvider</c> covers the property-grid "..." label button too.
