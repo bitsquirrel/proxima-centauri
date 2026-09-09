@@ -90,6 +90,8 @@ namespace Functions_for_Dynamics_Operations
             await CreateDataEntity.InitializeAsync(this).ConfigureAwait(false);
             await GenerateToolboxCommand.InitializeAsync(this).ConfigureAwait(false);
             await GenLabelsProjectCommand.InitializeAsync(this).ConfigureAwait(false);
+            await CreateLabelFromPropertyCommand.InitializeAsync(this).ConfigureAwait(false);
+            await D365LabelPropertyHook.InitializeAsync(this).ConfigureAwait(false);
 
             AdviseSolutionEvents();
         }
